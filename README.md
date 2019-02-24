@@ -6,6 +6,7 @@
 [![Travis Build
 Status](https://travis-ci.org/AQLT/rjwsacruncher.svg?branch=master)](https://travis-ci.org/AQLT/rjwsacruncher)
 [![](https://img.shields.io/badge/lifecycle-experimental-orange.svg?logo=github)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rjdemetra)](https://cran.r-project.org/package=rjdemetra)
 
 The goal of rjwsacruncher is to launch quickly and easily the
 [JWSACruncher](https://github.com/jdemetra/jwsacruncher) of
