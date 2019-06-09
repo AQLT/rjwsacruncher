@@ -9,14 +9,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "README-",
-  fig.align="center"
+  fig.align = "center"
 )
 ```
 
 # rjwsacruncher
 
 [![Travis Build Status](https://travis-ci.org/AQLT/rjwsacruncher.svg?branch=master)](https://travis-ci.org/AQLT/rjwsacruncher)
-[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg?logo=github)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/rjdemetra)](https://cran.r-project.org/package=rjdemetra)
 
 
