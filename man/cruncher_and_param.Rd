@@ -3,36 +3,38 @@
 \encoding{UTF-8}
 \name{cruncher_and_param}
 \alias{cruncher_and_param}
-\title{Lanceur rapide de cruncher}
+\title{Run quickly the 'JWSACruncher'}
 \usage{
-cruncher_and_param(workspace = NULL,
-  cruncher_bin_directory = getOption("cruncher_bin_directory"),
-  rename_multi_documents = TRUE, output = NULL,
-  delete_existing_file = NULL, log_file = NULL, ...)
+cruncher_and_param(workspace = NULL, output = NULL,
+  rename_multi_documents = FALSE, delete_existing_file = FALSE,
+  log_file = NULL,
+  cruncher_bin_directory = getOption("cruncher_bin_directory"), ...)
 }
 \arguments{
-\item{workspace}{path to the workspace. By default a dialog box opened to choose the workspace.}
+\item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}
 
-\item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. The default
+\item{output}{Full path of the output folder. By default (\code{output = NULL}) a folder is create in the path to the workspace ([workspace]/Output).}
+
+\item{rename_multi_documents}{Boolean indicating whether to rename the folders
+containing the outputs according to the names of the multi-documents of the workspace.
+By default \code{rename_multi_documents = FALSE}: the names of the XML files of the multi-documents are used.}
+
+\item{delete_existing_file}{only used if \code{rename_multi_documents = TRUE}. Boolean indicating whether to
+delete existing folders when renaming them. By default (\code{delete_existing_file = FALSE}) they are not deleted.}
+
+\item{log_file}{name of the log file of 'JWSACruncher'. By default the log isn't exported.}
+
+\item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. By default default
 the value of the option \code{"cruncher_bin_directory"} is used.}
 
-\item{rename_multi_documents}{booléen indiquant s'il faut renommer les dossiers contenant les sorties en fonction
-des noms des multi-documents du workspace. Par défaut \code{rename_multi_documents = TRUE}.
-Si \code{rename_multi_documents = FALSE} alors ce sont les noms des fichiers XML des multi_documents qui sont utilisés.}
-
-\item{output}{dossier contenant les résultats du cruncher. Par défaut (\code{output = NULL}) un dossier "Output" est créé à l'adresse du workspace.}
-
-\item{delete_existing_file}{utile uniquement si \code{rename_multi_documents = TRUE}, booléen indiquant s'il faut supprimer
-les dossiers existants lors du renommage des dossiers. Par défaut (\code{delete_existing_file = NULL}) une boîte de dialogue s'ouvre
-demandant l'action à réaliser.}
-
-\item{log_file}{nom du fichier qui contiendra la log du cruncher. Par défaut la log n'est pas exportée}
-
-\item{...}{autres paramètres de la fonction \link{create_param_file}.}
+\item{...}{other parameters of \link{create_param_file}.}
 }
 \value{
-L'adresse du workspace.
+Path to the workspace.
 }
 \description{
-Fonction qui permet de lancer le cruncher sur un workspace tout en créant le fichier des paramètres.
+Function to run the 'JWSACruncher' on a workspace while creating the parameter file.
+}
+\seealso{
+\code{\link{cruncher}}, \code{\link{update_workspace}}, \code{\link{create_param_file}}, \code{\link{multiprocessing_names}}.
 }

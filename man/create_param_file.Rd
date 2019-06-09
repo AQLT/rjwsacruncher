@@ -3,7 +3,7 @@
 \encoding{UTF-8}
 \name{create_param_file}
 \alias{create_param_file}
-\title{Création du fichier des paramètres du cruncher}
+\title{Create paramater file for the 'JWSACruncher'}
 \usage{
 create_param_file(dir_file_param = getwd(), bundle = 10000,
   csv_layout = "list", csv_separator = ";", ndecs = 6,
@@ -13,39 +13,44 @@ create_param_file(dir_file_param = getwd(), bundle = 10000,
   paths_path = NULL)
 }
 \arguments{
-\item{dir_file_param}{répertoire du dossier qui contiendra le fichier parametres.param des paramètres.}
+\item{dir_file_param}{Path to the directory that will contains the parameter file "parameters.param".}
 
-\item{bundle}{nombre maximum de séries dans un fichier de sortie. Par défaut \code{bundle = 10000}.}
+\item{bundle}{Maximum size for a group of series (in output). By default \code{bundle = 10000}.}
 
-\item{csv_layout}{mise en page du fichier de sortie. Par défaut \code{csv_layout = "list"}. Autres
-options : \code{csv_layout = "vtable"} ou \code{csv_layout = "htable"}.}
+\item{csv_layout}{Layout of the CSV files (series only). By default \code{csv_layout = "list"}. Other options: \code{csv_layout = "vtable"} (vertical table) or \code{csv_layout = "htable"} (horizontal table).}
 
-\item{csv_separator}{séparateur de colonnes utilisé dans le fichier csv. Par défaut \code{csv_separator = ";"}.}
+\item{csv_separator}{the field separator string used in the CSV file. By default \code{csv_separator = ";"}.}
 
-\item{ndecs}{nombre de décimales dans les sorties (6 par défaut).}
+\item{ndecs}{Number of decimals used in the output. By default \code{ndec = 6}.}
 
-\item{policy}{méthode de rafraîchissement utilisée. Par défaut \code{policy = "parameters"} (paramètres re-estimés).
-Les autres méthodes possibles sont :
-\code{"outliers"} (les outliers sont identifiés et les paramètres re-estimés) ;
-\code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres re-estimés) ;
-\code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres re-estimés) ;
-\code{"complete"} (le modèle est complétement ré-estimé).}
+\item{policy}{refreshing policy of the processing. Par défaut \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).}
 
-\item{output}{dossier où sont exportés les résultats. Par défaut (\code{output = NULL}) un dossier "Output" est créé à l'adresse du workspace.}
+\item{output}{Full path of the output folder. By default (\code{output = NULL}) a folder is create in the path to the workspace ([workspace]/Output).}
 
-\item{matrix_item}{chaîne de caractères contenant les noms des paramètres à exporter (voir le manuel de JDemetra+).
-Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_matrix_item")} (cette option
-est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+).}
+\item{matrix_item}{character containing the items of the matrix output (see the 'JDemetra+' manual for more information). By default, the items defined in the option \code{getOption("default_matrix_item")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).}
 
-\item{tsmatrix_series}{chaîne de caractères contenant les séries temporelles à exporter (voir le manuel de JDemetra+).
-Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_tsmatrix_series")} (cette option
-est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+)}
+\item{tsmatrix_series}{character containing the names of the times series to export (see the 'JDemetra+' manual for more information).  By default, the items defined in the option \code{getOption("default_tsmatrix_series")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).}
 
-\item{paths_path}{chemins vers les fichiers d'entrée (Excel, xml...).}
+\item{paths_path}{The paths used for relative addresses (see the "Demetra Paths" of the graphical interface of 'JDemetra+').}
 }
 \value{
-L'adresse du fichier de paramètres.
+Path to the paramater file.
 }
 \description{
-Pour fonctionner, le cruncher a besoin d'un fichier de paramètres : \code{create_param_file} permet de le créer
+To run the 'JWSACruncher' needs a parameter file and \code{create_param_file} allows to create it.
+}
+\details{
+When the 'JWSACruncher' is launched, the data is refreshed with a specific policy that is defined by the paramater \code{policy}. The available options are:
+\itemize{
+\item \code{policy = "current"}: all the estimations are fixed;
+\item \code{policy = "fixedparameters"} or \code{policy = "fixed"}: re-estimation of the coefficients of the regression variables (but not the ARIMA coefficients);
+\item \code{policy = "parameters"} (the default): \code{policy = "fixedparameters"} + re-estimation of ARIMA coefficients;
+\item \code{policy = "lastoutliers"}: \code{policy = "parameters"} + re-identification of last outliers (on the last year);
+\item \code{policy = "outliers"}: \code{policy = "lastoutliers"} + re-identification of all outliers;
+\item \code{policy = "stochastic"}: \code{policy = "outliers"} + re-identification of ARIMA orders;
+\item \code{policy = "complete"} or \code{policy = "concurrent"}: the model is completely re-identified and re-estimated.
+}
+}
+\seealso{
+\code{\link{cruncher_and_param}}.
 }

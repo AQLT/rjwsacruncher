@@ -8,12 +8,15 @@
 multiprocessing_names(workspace)
 }
 \arguments{
-\item{workspace}{path to the workspace. By default a dialog box opened to choose the workspace.}
+\item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}
 }
 \value{
-Un \code{data.frame} contenant le nom des multiprocessings sous JDemetra+ (colonne \code{name}) et
-le nom des fichiers XML associés (colonne \code{file})
+A \code{data.frame} containing the name of the multiprocessings that appears on 'JDemetra+' (column \code{name}) and
+the name of the associated XML files (column \code{file}).
 }
 \description{
-Fonction qui permet d'extraire le nom des multiprocessings sous JDemetra+ et les noms des fichiers XML associés.
+Function to get the name of the multiprocessings that appears on 'JDemetra+' and the name of the corresponding XML file.
+}
+\seealso{
+\code{\link{cruncher_and_param}}.
 }

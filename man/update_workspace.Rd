@@ -6,23 +6,25 @@
 \title{Update a workspace}
 \usage{
 update_workspace(workspace = NULL, policy = "parameters",
-  cruncher_bin_directory = getOption("cruncher_bin_directory"))
+  cruncher_bin_directory = getOption("cruncher_bin_directory"),
+  log_file = NULL)
 }
 \arguments{
-\item{workspace}{path to the workspace. By default a dialog box opened to choose the workspace.}
+\item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}
 
-\item{policy}{méthode de rafraîchissement utilisée. Par défaut \code{policy = "parameters"} (paramètres re-estimés).
-Les autres méthodes possibles sont :
-\code{"outliers"} (les outliers sont identifiés et les paramètres re-estimés) ;
-\code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres re-estimés) ;
-\code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres re-estimés) ;
-\code{"complete"} (le modèle est complétement ré-estimé).}
+\item{policy}{refreshing policy of the processing. Par défaut \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).}
 
-\item{cruncher_bin_directory}{répertoire contenant contenant le dossier "bin" du cruncher.}
+\item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. By default default
+the value of the option \code{"cruncher_bin_directory"} is used.}
+
+\item{log_file}{name of the log file of 'JWSACruncher'. By default the log isn't exported.}
 }
 \value{
-L'adresse du workspace.
+Path to the workspace.
 }
 \description{
 Function to update a workspace without exporting the results.
+}
+\seealso{
+\code{\link{cruncher}}, \code{\link{cruncher_and_param}}.
 }

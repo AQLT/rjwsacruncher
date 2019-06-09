@@ -1,5 +1,5 @@
 ---
-title: "Introduction à JDCruncheR : lancement du cruncher depuis JDCruncheR"
+title: "Run the 'JWSACruncher' with rjwsacruncher"
 date: "`r Sys.Date()`"
 output: 
   html_document:
@@ -13,111 +13,100 @@ vignette: >
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, size = "small")
-library(JDCruncheR)
 library(kableExtra)
 library(knitr)
 ```
 
-La version actuelle du package JDCruncheR (`r utils::packageVersion("JDCruncheR")`) permet de faire deux choses :
 
-- lancer facilement le cruncher de JDemetra+ ([JWSACruncher](https://github.com/jdemetra/jwsacruncher/releases)) pour mettre à jour un workspace et en exporter les résultats.  
-- calculer un *bilan qualité* qui permet de synthétiser l'ensemble des diagnostics liés aux séries désaisonnalisée afin de repérer rapidement les séries les plus problématiques sur lesquelles il faut concentrer son analyse. Il est surtout utile dans le cas de la désaisonnalisation d'un grand nombre de séries puisqu'il est dans ce cas impossible de regarder l'ensemble des diagnostics pour chaque série dans un temps raisonnable.
+# Launch the 'JWSACruncher"
 
-# Lancement de cruncher
+To use `rjwsacruncher` you need to download the JWACruncher. It is available on <https://github.com/jdemetra/jdemetra-app/releases> or can be downloaded with the function `download_cruncher()`:
+```{r, eval = FALSE}
+library(rjwsacruncher)
+# Directory where to save the JWSACruncher:
+directory <- tempdir()
+download_cruncher(directory)
+```
 
-Pour éviter que le package soit trop volumineux, le cruncher de JDemetra+ n'est pas intégré dans ce celui-ci. Il est donc à télécharger sous <https://github.com/jdemetra/jdemetra-app/releases>. Pour plus d'informations sur l'installation du cruncher et sa configuration avec une version portable de Java, voir le wiki de JDCruncheR : <https://github.com/AQLT/JDCruncheR/wiki/Installation-et-configuration-de-JDemetra--et-du-cruncher>.
+To configure the JWSACruncher with a portable version of Java you can use the function `configure_jwsacruncher()`. See `?configure_jwsacruncher` for more informations.
 
-Pour lancer le cruncher de JDemetra+ il faut trois fichiers :
+To run the JWSACruncher you need three files:
 
-- un fichier contenant les paramètres sur la méthode de rafraîchissement à utilisée pour mettre à jour le workspace ;  
-- un workspace valide de JDemetra+ ;  
-- l'adresse vers le cruncher.
+- a ".param" file containing the refresh policy and the items of the seasonal adjustment to export;  
+- a valid JDemetra+ workspace;
+- the path to the JWSACruncher.
 
-Dans le package JDCruncheR, il existe trois fonctions associées au lancement du cruncher :  
+In rjwsacruncher, there are four functions associated to run the JWSACruncher:  
 
-- `create_param_file()` qui permet de créer le fichier de paramètres ;  
-- `cruncher()` qui permet de lancer le cruncher sur un workspace à partir d'un fichier de paramètres ;  
-- `cruncher_and_param()` qui permet de lancer le cruncher tout en créant le fichier de paramètres et de personnaliser certaines sorties du cruncher.
+- `create_param_file()` to create the ".param" parameter file;  
+- `cruncher()` to run the JWSACruncher on a workspace from a parameter file;  
+- `cruncher_and_param()` to run the 'JWSACruncher' on a workspace while creating the parameter file;
+- `update_workspace()` to update a workspace without exporting the results.
 
-## Création du fichier de paramètres avec `create_param_file()`
+## Create the parameter file with `create_param_file()`
 
-Les paramètres de la fonction `create_param_file()` sont les mêmes que ceux décrits dans le wiki du cruncher de JDemetra+ : <https://github.com/jdemetra/jwsacruncher/wiki>. Les trois paramètres les plus importants de `create_param_file()` sont :  
+The parameters of the function `create_param_file()` 
+are those described in the wiki of the JWSACruncher: <https://github.com/jdemetra/jwsacruncher/wiki>. 
+The three most important parameters of `create_param_file()` are:  
 
-1. `policy` qui est la méthode de rafraichissement utilisée (voir tableau ci-dessous).
+1. `policy` the refresh policy (see table below).
 
 ```{r,echo=FALSE}
-refresh_policy <- structure(list(`Option sous JDemetra+` = c("Fixed model", 
+refresh_policy <- structure(list(`Option on JDemetra+` = c("Fixed model", 
 "Estimate regression coefficients", 
 "Estimate regression coefficients + Arima parameters", 
 "Estimate regression coefficients + Last outliers", 
 "Estimate regression coefficients + all outliers", 
 "Estimate regression coefficients + Arima model", 
-"Concurrent"), `Option du cruncher` = c("current", "fixedparameters (ou fixed)", 
-"parameters (paramètre par défaut)", "lastoutliers", "outliers", 
-"stochastic", "complete ou concurrent"), Signification = c("Le modèle ARIMA, les outliers et les autres paramètres du modèle de régression ne sont ni re-identifiés ni re-estimés. Le schéma de décomposition est inchangé.", 
-"Le modèle ARIMA, les outliers et les autres paramètres du modèle regARIMA ne sont pas re-identifiés. Les coefficients du modèle ARIMA sont fixés et les autres paramètres du modèle de régression sont re-estimés. Le schéma de décomposition est inchangé.", 
-"Le modèle ARIMA, les outliers et les autres paramètres du modèle de régression ne sont pas re-identifiés mais sont tous re-estimés. Le schéma de décomposition est inchangé.", 
-"Le modèle ARIMA, les outliers (sauf ceux sur la dernière année) et les autres paramètres du modèle de régression ne sont pas re-identifiés mais sont tous re-estimés. Les outliers sont re-identifiés sur la dernière année. Le schéma de décomposition est inchangé.", 
-"Le modèle ARIMA et les paramètres du modèle regARIMA autres que les outliers ne sont pas re-identifiés mais re-estimés. Tous les outliers sont re-identifiés. Le schéma de décomposition est inchangé.", 
-"Re-identification de tous les paramètres du modèle regARIMA sauf les variables calendaires. Le schéma de décomposition est inchangé.", 
-"Re-identification de tout le modèle regARIMA.")), .Names = c("Option sous JDemetra+", 
-"Option du cruncher", "Signification"), class = "data.frame", row.names = c(NA, 
--7L))
-if (opts_knit$get("rmarkdown.pandoc.to") == "latex"){
-    kable(refresh_policy, caption = "Les différentes politiques de rafraichissement",
-          booktabs = TRUE, format = "latex") %>% 
-        kable_styling(full_width = T,
-                      latex_options = "hold_position") %>% 
-        group_rows("Partial concurrent adjustment", 1, 6) %>% 
-        group_rows("Concurrent", 7, 7) %>% 
-        column_spec(1, width = "4cm") %>% 
-        column_spec(2, width = "2.5cm")
-}else{
-    refresh_policy[1:6, 1] <-  paste("Partial concurrent adjustment ->", refresh_policy[1:6, 1])
-    kable(refresh_policy, caption = "Les différentes politiques de rafraichissement",
-             booktabs = TRUE)
-}
+"Concurrent"), `Option for the JWSACruncher` = c("current", "fixedparameters (or fixed)", 
+"parameters (by default)", "lastoutliers", "outliers", 
+"stochastic", "complete (or concurrent)"),
+Description = c("The ARIMA model, outliers and other regression parameters are not re-identified and the values of all parameters are fixed. The transformation type remains unchanged.", 
+"The ARIMA model, outliers and other regression parameters are not re-identified. The coefficients of the ARIMA model are fixed, other coefficients are re-estimated. The transformation type remains unchanged.", 
+"The ARIMA model, outliers and other regression parameters are not re-identified. All parameters of the RegARIMA model are re-estimated. The transformation type remains unchanged.", 
+"The ARIMA model, outliers (except from the outliers in the last year of the sample) and other regression parameters are not re-identified. All parameters of the RegARIMA model are re-estimated. The outliers in the last year of the sample are re-identified. The transformation type remains unchanged.", 
+"The ARIMA model and regression parameters, except from outliers) are not re-identified. All parameters of the RegARIMA model are re-estimated. All outliers are re-identified. The transformation type remains unchanged.", 
+"Re-identification of the ARIMA model, outliers and regression variables, except from the calendar variables. The transformation type remains unchanged.", 
+"Re-identification of the whole RegARIMA model.")),
+.Names = c("Option on JDemetra+", 
+"Option for the JWSACruncher", "Description"),
+class = "data.frame", row.names = c(NA, -7L))
 
-
-
+refresh_policy[1:6, 1] <-  paste("Partial concurrent adjustment ->", refresh_policy[1:6, 1])
+kable(refresh_policy, caption = "Refresh policies",
+      booktabs = TRUE)
 ```
 
-2. `matrix_item` qui est une chaîne de caractères contenant les noms des paramètres à exporter. Par défaut ce sont ceux de l'option `default_matrix_item`. On peut donc au choix modifier l'option `default_matrix_item` ou le paramètre `matrix_item` :
+2. `matrix_item` character containing the items of the matrix output. By default, the items defined in the option `default_matrix_item` are exported. To change it we can change the option `default_matrix_item` or the parameter `matrix_item`:
 ```{r, eval = FALSE}
-library(JDCruncheR)
- # Pour afficher les paramètres par défaut :
+# To get the default parameters
 getOption("default_matrix_item")
-# Pour modifier les paramètres par défaut pour n'exporter par exemple
-# que les critères d'information :
+# To change the default parameters to, for example, only export
+# the information criteria:
 options(default_matrix_item = c("likelihood.aic",
                                 "likelihood.aicc",
                                 "likelihood.bic",
                                 "likelihood.bicc"))
 ```
 
-3. `tsmatrix_series` qui est une chaîne de caractères contenant les noms des paramètres à exporter. Par défaut ce sont ceux de l'option `default_tsmatrix_series`. On peut donc au choix modifier l'option `default_tsmatrix_series` ou le paramètre `tsmatrix_series` :
+3. `tsmatrix_series` character containing the names of the times series to export. By default, the items defined in the option `default_tsmatrix_series` are exported. To change it we can change the option `default_tsmatrix_series` or the parameter `tsmatrix_series`:
 ```{r, eval = FALSE}
- # Pour afficher les paramètres par défaut :
+# To get the default parameters
 getOption("default_tsmatrix_series")
-# Pour modifier les paramètres par défaut pour n'exporter par exemple que
-# la série désaisonnalisées et ses prévisions :
+# To change the default parameters to, for example, only export
+# the seasonally adjusted series and its forecasts:
 options(default_tsmatrix_series = c("sa", "sa_f"))
 ```
 
-
-Pour voir l'ensemble des paramètres il suffit d'utiliser sous R la commande `?create_param_file`.
-
-Une fois les différents choix de spécifications réalisés, il ne reste plus qu'à créer le fichier de paramètres. Ci-dessous quelques exemples.
-
+For more informations, see the help of the function: `?create_param_file`. Below some examples to create the parameter file:
 ```{r, eval = FALSE}
-# Un fichier parametres.param sera créé sous D:/ avec la politique de rafraichissement
-# "lastoutliers" et les autres paramètres par défaut
+# To create the file parameters.params in the directory "D:/" with
+# the refresh policy "lastoutliers" and the others default parameters:
 create_param_file(dir_file_param = "D:/",
                   policy = "lastoutliers")
 
-# Si l'on a modifié les options "default_matrix_item" et "default_tsmatrix_series" pour
-# n'exporter que les critères d'information, la série désaisonnalisées et ses
-# prévisions, la commande précédente est équivalent à : 
+# If the options "default_matrix_item" and "default_tsmatrix_series" were
+# changed to only export the information criteria, the seasonally adjusted series and its forecasts, the previous code is equivalent to:
 create_param_file(dir_file_param = "D:/",
                   policy = "lastoutliers",
                   matrix_item = c("likelihood.aic", "likelihood.aicc",
@@ -125,50 +114,44 @@ create_param_file(dir_file_param = "D:/",
                   tsmatrix_series = c("sa", "sa_f"))
 ```
 
+## To run the JWSACruncher
 
+To run the JWSACruncher with `cruncher()` or `cruncher_and_param()`, 
+you have to specify the path to the JWSACruncher (`cruncher_bin_directory` parameter) and the path to the workspace (`workspace` parameter).
 
-## Lancement du cruncher
-
-Pour lancer le cruncher avec `cruncher()` ou `cruncher_and_param()`, il faut spécifier le chemin vers le cruncher (paramètre `cruncher_bin_directory`) et le chemin vers le workspace (paramètre `workspace`).
-
-Par défaut le chemin vers le cruncher est celui de l'option `cruncher_bin_directory` : il suffit donc de modifier une seule fois cette option afin qu'elle s'applique à toutes les exécutions du cruncher. Le chemin à indiquer est celui du dossier contenant le fichier *jwsacruncher.bat* qui est situé dans le dossier "Bin" du dossier d'installation du cruncher. Ainsi, s'il a été installé sous `D:\jdemetra-cli-2.2.0`, le fichier *jwsacruncher.bat* sera présent sous `D:\jdemetra-cli-2.2.0\bin`. Il faut donc modifier l'option `cruncher_bin_directory` de la façon suivante :
+By default, the path to the JWSACruncher is the value of the option `cruncher_bin_directory`: therefore you only have to change this option once so that it applies to all the future running. The path to specify is the folder containing the *jwsacruncher.bat* file which is under the "Bin" folder of the JWSACruncher. Thus, if it is installed in `D:\jdemetra-cli-2.2.2`, the file *jwsacruncher.bat* will be under `D:\jdemetra-cli-2.2.2\bin` and you have to change the `cruncher_bin_directory` option as follows:
 
 ```{r, eval = FALSE}
-options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.0/bin/")
+options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.2/bin/")
 ```
 
-Si aucun workspace n'est selectionné alors une fenêtre s'ouvre invitant à sélectionner le workspace sur lequel on souhaite lancer le cruncher.
+If no workspace is specified, a dialog box opens to select it.
 
-La fonction `cruncher_and_param()` permet de créer un fichier temporaire de paramètres via la fonction `create_param_file()` et pour ensuite lancer le cruncher via la fonction `cruncher()`. En plus des paramètres disponibles dans ces deux fonctions, `cruncher_and_param()` permet de renommer le dossier contenant les résultats du workspace afin qu'ils soient égaux aux noms des multi-documents affichés dans l'application JDemetra+ grâce au paramètre `rename_multi_documents` (par défaut `rename_multi_documents = TRUE` : les dossiers sont renommés). Ci-dessous quelques exemples d'utilisation.
+The `cruncher_and_param()` function allows to create a temporary parameter file with `create_param_file()` and then run the JWSACruncher with `cruncher()`. In addition to the parameters available in these two functions, `cruncher_and_param()` allows to rename the output folder containing the workspace results so that they are equal to the names of the multi-documents displayed in the JDemetra+ software with the parameter `rename_multi_documents` (equals to `FALSE` by default). Below are some examples:
 
 ```{r, eval = FALSE}
-# La commande suivante permet de mettre à jour le workspace "ipi"" présent sous
-# D:/Campagne_CVS/ avec l'option de rafraîchissement "lastoutliers". Les autres
-# options de lancement du cruncher sont ceux par défaut de la fonction create_param_file().
-# En particulier, les paramètres exportées sont ceux des options "default_matrix_item"
-# et "default_tsmatrix_series" et les résultats seront sous D:/Campagne_CVS/Output/.
-cruncher_and_param(workspace = "D:/Campagne_CVS/ipi.xml",
-                   rename_multi_documents = FALSE,
+# The following code updates the workspace "workspace", that is under the folder D:/, 
+# with the refresh policy "lastoutliers". Others parameters are the default ones of create_param_file().
+# In particular, the exported parameters are those of the options
+# "default_matrix_item" options and "default_tsmatrix_series" and the results 
+# will be under D:/workspace/Output/.
+cruncher_and_param(workspace = "D:/workspace.xml",
                    policy = "lastoutliers")
 
-# Utililser le paramètre "outpout" pour changer le dossier contenant les résultats :
-cruncher_and_param(workspace = "D:/Campagne_CVS/ipi.xml",
-                   output = "D:/Resultats campagne/",
-                   rename_multi_documents = FALSE,
+# Use the parameter "outpout" to change the folder that will contains the results
+cruncher_and_param(workspace = "D:/workspace.xml",
+                   output = "D:/Results/",
                    policy = "lastoutliers")
 
-# Pour modifier les noms des dossiers contenant les sorties afin qu'ils soient égaux
-# aux noms des multi-documents affichés dans l'application JDemetra+ il suffit 
-# d'utiliser le paramètre "rename_multi_documents = TRUE" (valeur par défaut).
-# Le paramètre "delete_existing_file = TRUE" permet lui de supprimer éventuels
-# dossiers existants portant le même nom qu'un des multi-documents.
-cruncher_and_param(workspace = "D:/Campagne_CVS/ipi.xml",
+# To change the names of the folders containing the outputs so that they are equal
+# to the names of the multi-documents displayed in JDemetra+, use the parameter
+# "rename_multi_documents = TRUE". The parameter "delete_existing_file = TRUE"
+# allows to delete any existing folders with the same name as the multi-documents.
+cruncher_and_param(workspace = "D:/workspace.xml",
                    rename_multi_documents = TRUE,
                    delete_existing_file = TRUE,
                    policy = "lastoutliers")
 
-# Pour voir les autres paramètres de la fonction :
+# To see the other parameters:
 ?cruncher_and_param
 ```
-
-

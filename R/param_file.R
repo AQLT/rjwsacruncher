@@ -1,28 +1,31 @@
-#' Création du fichier des paramètres du cruncher
+#' Create paramater file for the 'JWSACruncher'
 #'
-#' Pour fonctionner, le cruncher a besoin d'un fichier de paramètres : \code{create_param_file} permet de le créer
+#' To run the 'JWSACruncher' needs a parameter file and \code{create_param_file} allows to create it.
 #'
-#' @param dir_file_param répertoire du dossier qui contiendra le fichier parametres.param des paramètres.
-#' @param bundle nombre maximum de séries dans un fichier de sortie. Par défaut \code{bundle = 10000}.
-#' @param csv_layout mise en page du fichier de sortie. Par défaut \code{csv_layout = "list"}. Autres
-#' options : \code{csv_layout = "vtable"} ou \code{csv_layout = "htable"}.
-#' @param csv_separator séparateur de colonnes utilisé dans le fichier csv. Par défaut \code{csv_separator = ";"}.
-#' @param ndecs nombre de décimales dans les sorties (6 par défaut).
-#' @param policy méthode de rafraîchissement utilisée. Par défaut \code{policy = "parameters"} (paramètres re-estimés).
-#' Les autres méthodes possibles sont :
-#' \code{"outliers"} (les outliers sont identifiés et les paramètres re-estimés) ;
-#' \code{"lastoutliers"} (les outliers sont ré-identifiés sur la dernière année et les paramètres re-estimés) ;
-#' \code{"stochastic"} (le modèle arima et les outliers sont identifiés et les paramètres re-estimés) ;
-#' \code{"complete"} (le modèle est complétement ré-estimé).
-#' @param output dossier où sont exportés les résultats. Par défaut (\code{output = NULL}) un dossier "Output" est créé à l'adresse du workspace.
-#' @param matrix_item chaîne de caractères contenant les noms des paramètres à exporter (voir le manuel de JDemetra+).
-#' Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_matrix_item")} (cette option
-#' est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+).
-#' @param tsmatrix_series chaîne de caractères contenant les séries temporelles à exporter (voir le manuel de JDemetra+).
-#'  Les paramètres par défaut sont obtenues en exécutant la commande \code{getOption("default_tsmatrix_series")} (cette option
-#' est initialisée aux mêmes paramètres par défaut que ceux de JDemetra+)
-#' @param paths_path chemins vers les fichiers d'entrée (Excel, xml...).
-#' @return L'adresse du fichier de paramètres.
+#' @param dir_file_param Path to the directory that will contains the parameter file "parameters.param".
+#' @param bundle Maximum size for a group of series (in output). By default \code{bundle = 10000}.
+#' @param csv_layout Layout of the CSV files (series only). By default \code{csv_layout = "list"}. Other options: \code{csv_layout = "vtable"} (vertical table) or \code{csv_layout = "htable"} (horizontal table).
+#' @param csv_separator the field separator string used in the CSV file. By default \code{csv_separator = ";"}.
+#' @param ndecs Number of decimals used in the output. By default \code{ndec = 6}.
+#' @param policy refreshing policy of the processing. Par défaut \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).
+#' @param output Full path of the output folder. By default (\code{output = NULL}) a folder is create in the path to the workspace (\[workspace\]/Output).
+#' @param matrix_item character containing the items of the matrix output (see the 'JDemetra+' manual for more information). By default, the items defined in the option \code{getOption("default_matrix_item")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).
+#' @param tsmatrix_series character containing the names of the times series to export (see the 'JDemetra+' manual for more information).  By default, the items defined in the option \code{getOption("default_tsmatrix_series")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).
+#' @param paths_path The paths used for relative addresses (see the "Demetra Paths" of the graphical interface of 'JDemetra+').
+#' 
+#' @details When the 'JWSACruncher' is launched, the data is refreshed with a specific policy that is defined by the paramater \code{policy}. The available options are:
+#' \itemize{
+#' \item \code{policy = "current"}: all the estimations are fixed;
+#' \item \code{policy = "fixedparameters"} or \code{policy = "fixed"}: re-estimation of the coefficients of the regression variables (but not the ARIMA coefficients);
+#' \item \code{policy = "parameters"} (the default): \code{policy = "fixedparameters"} + re-estimation of ARIMA coefficients;
+#' \item \code{policy = "lastoutliers"}: \code{policy = "parameters"} + re-identification of last outliers (on the last year);
+#' \item \code{policy = "outliers"}: \code{policy = "lastoutliers"} + re-identification of all outliers;
+#' \item \code{policy = "stochastic"}: \code{policy = "outliers"} + re-identification of ARIMA orders;
+#' \item \code{policy = "complete"} or \code{policy = "concurrent"}: the model is completely re-identified and re-estimated.
+#' }
+#' 
+#' @return Path to the paramater file.
+#' @seealso \code{\link{cruncher_and_param}}.
 #' @encoding UTF-8
 #' @export
 create_param_file <- function(dir_file_param = getwd(), bundle = 10000, csv_layout = "list", csv_separator = ";",
@@ -37,24 +40,24 @@ create_param_file <- function(dir_file_param = getwd(), bundle = 10000, csv_layo
 
     output_line <- matrix_lines <- tsmatrix_lines <- path_lines <- NULL
 
-    if(!is.null(output)){
+    if (!is.null(output)) {
         output <- normalizePath(output)
         output_line <- paste0("    <output>", gsub("/", "\\", output, fixed = TRUE), "</output>")
     }
 
-    if(!is.null(matrix_item)){
+    if (!is.null(matrix_item)) {
         matrix_lines <- c("    <matrix>",
                           paste0("        <item>", matrix_item, "</item>"),
                           "    </matrix>")
     }
 
-    if(!is.null(tsmatrix_series)){
+    if (!is.null(tsmatrix_series)) {
         tsmatrix_lines <- c("    <tsmatrix>",
                             paste0("        <series>", tsmatrix_series, "</series>"),
                             "    </tsmatrix>")
     }
 
-    if(!is.null(paths_path)){
+    if (!is.null(paths_path)) {
         path_lines <- c("    <paths>",
                         paste0("        <path>", gsub("/", "\\", paths_path, fixed = TRUE), "</path>"),
                         "    </paths>")
@@ -64,8 +67,8 @@ create_param_file <- function(dir_file_param = getwd(), bundle = 10000, csv_layo
                     matrix_lines, tsmatrix_lines, path_lines,
                     "</wsaConfig>"
     )
-    writeLines(file_param, con = paste0(dir_file_param,"/parametres.param"))
-    return(invisible(paste0(dir_file_param,"/parametres.param")))
+    writeLines(file_param, con = paste0(dir_file_param,"/parameters.param"))
+    return(invisible(paste0(dir_file_param,"/parameters.param")))
 }
 
 

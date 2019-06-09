@@ -14,15 +14,15 @@ by default to select the directory.}
 \item{cruncher_version}{character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.}
 }
 \description{
-Function to download the .zip file of the 'JWSACruncher'
+Function to download the ZIP file of the 'JWSACruncher'
 }
 \details{
-The 'JWSACruncher' is downloaded from \url{https://github.com/jdemetra/jwsacruncher/releases}
+The 'JWSACruncher' is downloaded from \url{https://github.com/jdemetra/jwsacruncher/releases}. To use it, it has to be unzip.
 }
 \examples{
 \dontrun{
-# In Windows opens a dialog box to choose the directory where to download the last
-# version of the 'JWSACruncher'
+# On Windows opens a dialog box to choose the directory where to
+# download the last version of the 'JWSACruncher'
 download_cruncher()
 
 dir <- tempdir()
@@ -32,4 +32,7 @@ download_cruncher(dir)
 # To download the release of the version 2.2.2:
 download_cruncher(dir, "2.2.2")
 }
+}
+\seealso{
+\code{\link{configure_jwsacruncher}}.
 }

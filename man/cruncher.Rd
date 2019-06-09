@@ -3,25 +3,28 @@
 \encoding{UTF-8}
 \name{cruncher}
 \alias{cruncher}
-\title{Lanceur de cruncher}
+\title{Run the 'JWSACruncher'}
 \usage{
 cruncher(workspace,
   cruncher_bin_directory = getOption("cruncher_bin_directory"),
   param_file_path, log_file)
 }
 \arguments{
-\item{workspace}{path to the workspace. By default a dialog box opened to choose the workspace.}
+\item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}
 
-\item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. The default
+\item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. By default default
 the value of the option \code{"cruncher_bin_directory"} is used.}
 
-\item{param_file_path}{path to the parameter file of the cruncher. By default a .params file is search in the save directory of the workspace.}
+\item{param_file_path}{path to the parameter file of the 'JWSACruncher' By default a .params file is search in the save directory of the workspace.}
 
-\item{log_file}{nom du fichier qui contiendra la log du cruncher. Par défaut la log n'est pas exportée}
+\item{log_file}{name of the log file of 'JWSACruncher'. By default the log isn't exported.}
 }
 \value{
-L'adresse du workspace.
+The path to the workspace.
 }
 \description{
-Fonction qui permet de lancer le cruncher sur un workspace à partir d'un fichier de paramètres.
+Function to run the 'JWSACruncher' on a workspace from a parameter file.
+}
+\seealso{
+\code{\link{cruncher_and_param}}, \code{\link{update_workspace}}.
 }

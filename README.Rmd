@@ -23,6 +23,9 @@ knitr::opts_chunk$set(
 The goal of rjwsacruncher is to launch quickly and easily the [JWSACruncher](https://github.com/jdemetra/jwsacruncher) of [JDemetra+](https://github.com/jdemetra/jdemetra-app). The JWSACruncher is a console tool that allows to update a JDemetra+ workspace's and to export the results without having to use JDemetra+. More details on the JWSACruncher can be found on <https://github.com/jdemetra/jwsacruncher/wiki>.
 
 ## Installation
+```{r, include = FALSE}
+library(rjwsacruncher)
+```
 
 The development version can be installed from GitHub:
 
@@ -31,7 +34,7 @@ The development version can be installed from GitHub:
 devtools::install_github("AQLT/rjwsacruncher", build_vignettes = TRUE)
 ```
 
-The JWSACruncher is not included in the package. It can be downloaded from GitHub (<https://github.com/jdemetra/jwsacruncher/releases>) or with the function `download_cruncher()`;
+The JWSACruncher is not included in the package. It can be downloaded from GitHub (<https://github.com/jdemetra/jwsacruncher/releases>) or with the function `download_cruncher()`:
 
 ```{r, eval = FALSE}
 library(rjwsacruncher)
@@ -40,4 +43,24 @@ directory <- tempdir()
 download_cruncher(directory)
 ```
 
+Since the version 2.2.0, the JWSACruncher needs Java 8 or higher to run. If you cannot install it (for example for security reasons) you can install a portable version of 'Java' (that does not require administrator rights) and configure the JWSACruncher to use this portable version with the function `configure_jwsacruncher()`.
 
+## Usage
+
+The JWSACruncher can be easily runned with the function `cruncher_and_param()`. To use it, the path to the "Bin" folder of the JWSACruncher has to be defined. For example, if the JWSACruncher is under `D:/jdemetra-cli-2.2.2/`:
+```{r, eval = FALSE}
+options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.2/bin/")
+```
+The export items can be changed with the function "default_matrix_item" and "default_tsmatrix_series":
+```{r, eval = TRUE}
+# To get the default values:
+head(getOption("default_matrix_item"))
+getOption("default_tsmatrix_series")
+# To only export the seasonally adjusted series and its forecasts:
+options(default_tsmatrix_series = c("sa", "sa_f"))
+```
+The run the JWSACruncher on the workspace `D:/workspace.xml` with the refresh policy "lastoutliers":
+```{r, eval = FALSE}
+cruncher_and_param(workspace = "D:/workspace.xml",
+                   policy = "lastoutliers")
+```
