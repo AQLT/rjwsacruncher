@@ -7,13 +7,12 @@ output:
     toc_depth: 2
     toc_float: true
 vignette: >
-  %\VignetteIndexEntry{Lancement du cruncher}
+  %\VignetteIndexEntry{Run the 'JWSACruncher' with rjwsacruncher}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, size = "small")
-library(kableExtra)
 library(knitr)
 ```
 
@@ -100,14 +99,15 @@ options(default_tsmatrix_series = c("sa", "sa_f"))
 
 For more informations, see the help of the function: `?create_param_file`. Below some examples to create the parameter file:
 ```{r, eval = FALSE}
-# To create the file parameters.params in the directory "D:/" with
+export_dir <- tempdir()
+# To create the file parameters.params in the directory export_dir with
 # the refresh policy "lastoutliers" and the others default parameters:
 create_param_file(dir_file_param = "D:/",
                   policy = "lastoutliers")
 
 # If the options "default_matrix_item" and "default_tsmatrix_series" were
 # changed to only export the information criteria, the seasonally adjusted series and its forecasts, the previous code is equivalent to:
-create_param_file(dir_file_param = "D:/",
+create_param_file(dir_file_param = export_dir,
                   policy = "lastoutliers",
                   matrix_item = c("likelihood.aic", "likelihood.aicc",
                                   "likelihood.bic", "likelihood.bicc"),

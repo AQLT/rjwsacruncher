@@ -28,11 +28,14 @@
 #' @seealso \code{\link{cruncher_and_param}}.
 #' @encoding UTF-8
 #' @export
-create_param_file <- function(dir_file_param = getwd(), bundle = 10000, csv_layout = "list", csv_separator = ";",
+create_param_file <- function(dir_file_param, bundle = 10000, csv_layout = "list", csv_separator = ";",
                               ndecs = 6, policy = "parameters", output = NULL,
                               matrix_item = getOption("default_matrix_item"),
                               tsmatrix_series = getOption("default_tsmatrix_series"),
                               paths_path = NULL){
+    if (missing(dir_file_param))
+        stop("The parameter dir_file_param is missing")
+    
     first_line <- "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
     param_line <- paste("<wsaConfig bundle=", bundle, " csvlayout=", csv_layout, " csvseparator=",
                         csv_separator, " ndecs=",ndecs,">", sep = "\"")
@@ -70,7 +73,3 @@ create_param_file <- function(dir_file_param = getwd(), bundle = 10000, csv_layo
     writeLines(file_param, con = paste0(dir_file_param,"/parameters.param"))
     return(invisible(paste0(dir_file_param,"/parameters.param")))
 }
-
-
-
-

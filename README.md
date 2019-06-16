@@ -4,24 +4,32 @@
 # rjwsacruncher
 
 [![Travis Build
-Status](https://travis-ci.org/AQLT/rjwsacruncher.svg?branch=master)](https://travis-ci.org/AQLT/rjwsacruncher)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rjdemetra)](https://cran.r-project.org/package=rjdemetra)
+Status](https://img.shields.io/travis/AQLT/rjwsacruncher.svg?logo=travis)](https://travis-ci.org/AQLT/rjwsacruncher)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)
+[![CRAN last
+release](http://www.r-pkg.org/badges/last-release/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)
+[![CRAN monthly
+downloads](http://cranlogs.r-pkg.org/badges/rjwsacruncher?color=lightgrey)](https://cran.r-project.org/package=rjwsacruncher)
+[![CRAN
+downloads](http://cranlogs.r-pkg.org/badges/grand-total/rjwsacruncher?color=lightgrey)](https://cran.r-project.org/package=rjwsacruncher)
 
 The goal of rjwsacruncher is to launch quickly and easily the
 [JWSACruncher](https://github.com/jdemetra/jwsacruncher) of
 [JDemetra+](https://github.com/jdemetra/jdemetra-app). The JWSACruncher
-is a console tool that allows to update a JDemetra+ workspace’s and to
-export the results without having to use JDemetra+. More details on the
+is a console tool that allows to update a JDemetra+ workspace and to
+export the results without having to open JDemetra+. More details on the
 JWSACruncher can be found on
 <https://github.com/jdemetra/jwsacruncher/wiki>.
 
 ## Installation
 
-The development version can be installed from GitHub:
-
 ``` r
+# Install release version from CRAN
+install.packages("rjwsacruncher")
+
+# Install development version from GitHub
 # install.packages("devtools")
-devtools::install_github("AQLT/rjwsacruncher", build_vignettes = TRUE)
+devtools::install_github("AQLT/rjwsacruncher")
 ```
 
 The JWSACruncher is not included in the package. It can be downloaded
