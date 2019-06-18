@@ -53,7 +53,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Lancement_cruncher.html">Run the 'JWSACruncher' with rjwsacruncher</a>
+      <a href="../articles/run_jwsacruncher.html">Run the 'JWSACruncher' with rjwsacruncher</a>
     </li>
   </ul>
 </li>
@@ -79,10 +79,10 @@
     <div class="page-header toc-ignore">
       <h1>Run the ‘JWSACruncher’ with rjwsacruncher</h1>
             
-            <h4 class="date">2019-06-09</h4>
+            <h4 class="date">2019-06-18</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/AQLT/rjwsacruncher/blob/master/vignettes/Lancement_cruncher.Rmd"><code>vignettes/Lancement_cruncher.Rmd</code></a></small>
-      <div class="hidden name"><code>Lancement_cruncher.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/AQLT/rjwsacruncher/blob/master/vignettes/run_jwsacruncher.Rmd"><code>vignettes/run_jwsacruncher.Rmd</code></a></small>
+      <div class="hidden name"><code>run_jwsacruncher.Rmd</code></div>
 
     </div>
 
@@ -127,97 +127,47 @@
 <code>policy</code> the refresh policy (see table below).</li>
 </ol>
 <table class="table">
-<caption>
-Refresh policies
-</caption>
-<thead><tr>
-<th style="text-align:left;">
-Option on JDemetra+
-</th>
-<th style="text-align:left;">
-Option for the JWSACruncher
-</th>
-<th style="text-align:left;">
-Description
-</th>
+<caption>Refresh policies</caption>
+<thead><tr class="header">
+<th align="left">Option on JDemetra+</th>
+<th align="left">Option for the JWSACruncher</th>
+<th align="left">Description</th>
 </tr></thead>
 <tbody>
-<tr>
-<td style="text-align:left;">
-Partial concurrent adjustment -&gt; Fixed model
-</td>
-<td style="text-align:left;">
-current
-</td>
-<td style="text-align:left;">
-The ARIMA model, outliers and other regression parameters are not re-identified and the values of all parameters are fixed. The transformation type remains unchanged.
-</td>
+<tr class="odd">
+<td align="left">Partial concurrent adjustment -&gt; Fixed model</td>
+<td align="left">current</td>
+<td align="left">The ARIMA model, outliers and other regression parameters are not re-identified and the values of all parameters are fixed. The transformation type remains unchanged.</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Partial concurrent adjustment -&gt; Estimate regression coefficients
-</td>
-<td style="text-align:left;">
-fixedparameters (or fixed)
-</td>
-<td style="text-align:left;">
-The ARIMA model, outliers and other regression parameters are not re-identified. The coefficients of the ARIMA model are fixed, other coefficients are re-estimated. The transformation type remains unchanged.
-</td>
+<tr class="even">
+<td align="left">Partial concurrent adjustment -&gt; Estimate regression coefficients</td>
+<td align="left">fixedparameters (or fixed)</td>
+<td align="left">The ARIMA model, outliers and other regression parameters are not re-identified. The coefficients of the ARIMA model are fixed, other coefficients are re-estimated. The transformation type remains unchanged.</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Partial concurrent adjustment -&gt; Estimate regression coefficients + Arima parameters
-</td>
-<td style="text-align:left;">
-parameters (by default)
-</td>
-<td style="text-align:left;">
-The ARIMA model, outliers and other regression parameters are not re-identified. All parameters of the RegARIMA model are re-estimated. The transformation type remains unchanged.
-</td>
+<tr class="odd">
+<td align="left">Partial concurrent adjustment -&gt; Estimate regression coefficients + Arima parameters</td>
+<td align="left">parameters (by default)</td>
+<td align="left">The ARIMA model, outliers and other regression parameters are not re-identified. All parameters of the RegARIMA model are re-estimated. The transformation type remains unchanged.</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Partial concurrent adjustment -&gt; Estimate regression coefficients + Last outliers
-</td>
-<td style="text-align:left;">
-lastoutliers
-</td>
-<td style="text-align:left;">
-The ARIMA model, outliers (except from the outliers in the last year of the sample) and other regression parameters are not re-identified. All parameters of the RegARIMA model are re-estimated. The outliers in the last year of the sample are re-identified. The transformation type remains unchanged.
-</td>
+<tr class="even">
+<td align="left">Partial concurrent adjustment -&gt; Estimate regression coefficients + Last outliers</td>
+<td align="left">lastoutliers</td>
+<td align="left">The ARIMA model, outliers (except from the outliers in the last year of the sample) and other regression parameters are not re-identified. All parameters of the RegARIMA model are re-estimated. The outliers in the last year of the sample are re-identified. The transformation type remains unchanged.</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Partial concurrent adjustment -&gt; Estimate regression coefficients + all outliers
-</td>
-<td style="text-align:left;">
-outliers
-</td>
-<td style="text-align:left;">
-The ARIMA model and regression parameters, except from outliers) are not re-identified. All parameters of the RegARIMA model are re-estimated. All outliers are re-identified. The transformation type remains unchanged.
-</td>
+<tr class="odd">
+<td align="left">Partial concurrent adjustment -&gt; Estimate regression coefficients + all outliers</td>
+<td align="left">outliers</td>
+<td align="left">The ARIMA model and regression parameters, except from outliers) are not re-identified. All parameters of the RegARIMA model are re-estimated. All outliers are re-identified. The transformation type remains unchanged.</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Partial concurrent adjustment -&gt; Estimate regression coefficients + Arima model
-</td>
-<td style="text-align:left;">
-stochastic
-</td>
-<td style="text-align:left;">
-Re-identification of the ARIMA model, outliers and regression variables, except from the calendar variables. The transformation type remains unchanged.
-</td>
+<tr class="even">
+<td align="left">Partial concurrent adjustment -&gt; Estimate regression coefficients + Arima model</td>
+<td align="left">stochastic</td>
+<td align="left">Re-identification of the ARIMA model, outliers and regression variables, except from the calendar variables. The transformation type remains unchanged.</td>
 </tr>
-<tr>
-<td style="text-align:left;">
-Concurrent
-</td>
-<td style="text-align:left;">
-complete (or concurrent)
-</td>
-<td style="text-align:left;">
-Re-identification of the whole RegARIMA model.
-</td>
+<tr class="odd">
+<td align="left">Concurrent</td>
+<td align="left">complete (or concurrent)</td>
+<td align="left">Re-identification of the whole RegARIMA model.</td>
 </tr>
 </tbody>
 </table>
@@ -243,18 +193,19 @@ Re-identification of the whole RegARIMA model.
 <a class="sourceLine" id="cb3-4" title="4"><span class="co"># the seasonally adjusted series and its forecasts:</span></a>
 <a class="sourceLine" id="cb3-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">default_tsmatrix_series =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"sa"</span>, <span class="st">"sa_f"</span>))</a></code></pre></div>
 <p>For more informations, see the help of the function: <code><a href="../reference/create_param_file.html">?create_param_file</a></code>. Below some examples to create the parameter file:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># To create the file parameters.params in the directory "D:/" with</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co"># the refresh policy "lastoutliers" and the others default parameters:</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="../reference/create_param_file.html">create_param_file</a></span>(<span class="dt">dir_file_param =</span> <span class="st">"D:/"</span>,</a>
-<a class="sourceLine" id="cb4-4" title="4">                  <span class="dt">policy =</span> <span class="st">"lastoutliers"</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5"></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co"># If the options "default_matrix_item" and "default_tsmatrix_series" were</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co"># changed to only export the information criteria, the seasonally adjusted series and its forecasts, the previous code is equivalent to:</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="kw"><a href="../reference/create_param_file.html">create_param_file</a></span>(<span class="dt">dir_file_param =</span> <span class="st">"D:/"</span>,</a>
-<a class="sourceLine" id="cb4-9" title="9">                  <span class="dt">policy =</span> <span class="st">"lastoutliers"</span>,</a>
-<a class="sourceLine" id="cb4-10" title="10">                  <span class="dt">matrix_item =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"likelihood.aic"</span>, <span class="st">"likelihood.aicc"</span>,</a>
-<a class="sourceLine" id="cb4-11" title="11">                                  <span class="st">"likelihood.bic"</span>, <span class="st">"likelihood.bicc"</span>),</a>
-<a class="sourceLine" id="cb4-12" title="12">                  <span class="dt">tsmatrix_series =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"sa"</span>, <span class="st">"sa_f"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">export_dir &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempdir</a></span>()</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co"># To create the file parameters.params in the directory export_dir with</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co"># the refresh policy "lastoutliers" and the others default parameters:</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw"><a href="../reference/create_param_file.html">create_param_file</a></span>(<span class="dt">dir_file_param =</span> <span class="st">"D:/"</span>,</a>
+<a class="sourceLine" id="cb4-5" title="5">                  <span class="dt">policy =</span> <span class="st">"lastoutliers"</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co"># If the options "default_matrix_item" and "default_tsmatrix_series" were</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co"># changed to only export the information criteria, the seasonally adjusted series and its forecasts, the previous code is equivalent to:</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw"><a href="../reference/create_param_file.html">create_param_file</a></span>(<span class="dt">dir_file_param =</span> export_dir,</a>
+<a class="sourceLine" id="cb4-10" title="10">                  <span class="dt">policy =</span> <span class="st">"lastoutliers"</span>,</a>
+<a class="sourceLine" id="cb4-11" title="11">                  <span class="dt">matrix_item =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"likelihood.aic"</span>, <span class="st">"likelihood.aicc"</span>,</a>
+<a class="sourceLine" id="cb4-12" title="12">                                  <span class="st">"likelihood.bic"</span>, <span class="st">"likelihood.bicc"</span>),</a>
+<a class="sourceLine" id="cb4-13" title="13">                  <span class="dt">tsmatrix_series =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"sa"</span>, <span class="st">"sa_f"</span>))</a></code></pre></div>
 </div>
 <div id="to-run-the-jwsacruncher" class="section level2">
 <h2 class="hasAnchor">
