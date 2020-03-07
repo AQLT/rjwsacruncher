@@ -38,6 +38,11 @@ navbar:
         href: https://github.com/AQLT/ggdemetra
       - text: rjdqa
         href: https://github.com/AQLT/rjdqa
+      - text: rjdworkspace
+        href: https://github.com/AQLT/rjdworkspace
+      - text: rjdmarkdown
+        href: https://github.com/AQLT/rjdmarkdown
+
     github:
       icon: fa-github fa-lg
       href: https://github.com/AQLT/rjwsacruncher
