@@ -5,10 +5,15 @@
 \alias{cruncher_and_param}
 \title{Run quickly the 'JWSACruncher'}
 \usage{
-cruncher_and_param(workspace = NULL, output = NULL,
-  rename_multi_documents = FALSE, delete_existing_file = FALSE,
+cruncher_and_param(
+  workspace = NULL,
+  output = NULL,
+  rename_multi_documents = FALSE,
+  delete_existing_file = FALSE,
   log_file = NULL,
-  cruncher_bin_directory = getOption("cruncher_bin_directory"), ...)
+  cruncher_bin_directory = getOption("cruncher_bin_directory"),
+  ...
+)
 }
 \arguments{
 \item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}

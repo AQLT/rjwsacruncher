@@ -5,9 +5,12 @@
 \alias{cruncher}
 \title{Run the 'JWSACruncher'}
 \usage{
-cruncher(workspace,
+cruncher(
+  workspace,
   cruncher_bin_directory = getOption("cruncher_bin_directory"),
-  param_file_path, log_file)
+  param_file_path,
+  log_file
+)
 }
 \arguments{
 \item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}

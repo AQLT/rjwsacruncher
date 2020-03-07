@@ -5,11 +5,18 @@
 \alias{create_param_file}
 \title{Create paramater file for the 'JWSACruncher'}
 \usage{
-create_param_file(dir_file_param, bundle = 10000, csv_layout = "list",
-  csv_separator = ";", ndecs = 6, policy = "parameters",
-  output = NULL, matrix_item = getOption("default_matrix_item"),
+create_param_file(
+  dir_file_param,
+  bundle = 10000,
+  csv_layout = "list",
+  csv_separator = ";",
+  ndecs = 6,
+  policy = "parameters",
+  output = NULL,
+  matrix_item = getOption("default_matrix_item"),
   tsmatrix_series = getOption("default_tsmatrix_series"),
-  paths_path = NULL)
+  paths_path = NULL
+)
 }
 \arguments{
 \item{dir_file_param}{Path to the directory that will contains the parameter file "parameters.param".}

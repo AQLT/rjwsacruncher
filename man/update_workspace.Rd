@@ -5,9 +5,12 @@
 \alias{update_workspace}
 \title{Update a workspace}
 \usage{
-update_workspace(workspace = NULL, policy = "parameters",
+update_workspace(
+  workspace = NULL,
+  policy = "parameters",
   cruncher_bin_directory = getOption("cruncher_bin_directory"),
-  log_file = NULL)
+  log_file = NULL
+)
 }
 \arguments{
 \item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}
