@@ -52,15 +52,25 @@ cruncher <- function(workspace,
 
     wd <- getwd()
     setwd(cruncher_bin_directory)
-
-    log <- shell(paste0(
+    on.exit(setwd(wd))
+    
+    os <- Sys.info()[['sysname']]
+    if (os == "Windows") {
+      log <- system(paste0(
         "jwsacruncher \""
         , workspace
         ,"\" -x \""
         , param_file_path,"\""
-    ), intern = TRUE)
-
-    setwd(wd)
+      ), intern = TRUE)
+    } else if (os == "Darwin") {
+      # Mac OS
+      log <- system(paste0(
+        "./jwsacruncher \""
+        , workspace
+        ,"\" -x \""
+        , param_file_path,"\""
+      ), intern = TRUE)
+    }
 
     if (!missing(log_file) && !is.null(log_file))
         writeLines(text = log, con = log_file)
