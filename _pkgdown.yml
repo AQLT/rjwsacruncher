@@ -1,0 +1,43 @@
+navbar:
+  structure:
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right: 
+    - jdemetra
+    - rpackages
+    - github
+  components:
+    home:
+      icon: fa-home fa-lg
+      href: index.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    intro:
+      text: Get started
+      href: articles/run_jwsacruncher.html
+    articles:
+    jdemetra:
+      text: JDemetra+
+      menu:
+      - text: Download JDemetra+
+        href: https://github.com/jdemetra/jdemetra-app/releases
+      - text: JDemetra+ documentation
+        href: https://jdemetradocumentation.github.io/JDemetra-documentation/
+    rpackages:
+      text: Around JDemetra+ and R
+      menu:
+      - text: RJDemetra
+        href: https://github.com/jdemetra/rjdemetra
+      - text: ggdemetra
+        href: https://github.com/AQLT/ggdemetra
+      - text: rjdqa
+        href: https://github.com/AQLT/rjdqa
+    github:
+      icon: fa-github fa-lg
+      href: https://github.com/AQLT/rjwsacruncher
