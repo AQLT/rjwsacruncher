@@ -21,6 +21,9 @@ navbar:
     intro:
       text: Get started
       href: articles/run_jwsacruncher.html
+    news:
+      text: News
+      href: news/index.html
     articles:
     jdemetra:
       text: JDemetra+

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Update a workspace — update_workspace • rjwsacruncher</title>
+<title>Changelog • rjwsacruncher</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,7 @@
 
 
 
-<meta property="og:title" content="Update a workspace — update_workspace" />
-<meta property="og:description" content="Function to update a workspace without exporting the results." />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -56,7 +54,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -150,61 +148,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Update a workspace</h1>
-    <small class="dont-index">Source: <a href='https://github.com/AQLT/rjwsacruncher/blob/master/R/Cruncher.R'><code>R/Cruncher.R</code></a></small>
-    <div class="hidden name"><code>update_workspace.Rd</code></div>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/AQLT/rjwsacruncher/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Function to update a workspace without exporting the results.</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>update_workspace</span>(
-  <span class='kw'>workspace</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>policy</span> <span class='kw'>=</span> <span class='st'>"parameters"</span>,
-  <span class='kw'>cruncher_bin_directory</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span>(<span class='st'>"cruncher_bin_directory"</span>),
-  <span class='kw'>log_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>workspace</th>
-      <td><p>path to the workspace. By default a dialog box opens to choose the workspace.</p></td>
-    </tr>
-    <tr>
-      <th>policy</th>
-      <td><p>refreshing policy of the processing. Par défaut <code>policy = "parameters"</code> (re-estimation of the coefficients of the reg-ARIMA model, see details).</p></td>
-    </tr>
-    <tr>
-      <th>cruncher_bin_directory</th>
-      <td><p>path to the "bin" directory of the 'JWSACruncher'. By default default
-the value of the option <code>"cruncher_bin_directory"</code> is used.</p></td>
-    </tr>
-    <tr>
-      <th>log_file</th>
-      <td><p>name of the log file of 'JWSACruncher'. By default the log isn't exported.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>Path to the workspace.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='cruncher.html'>cruncher</a></code>, <code><a href='cruncher_and_param.html'>cruncher_and_param</a></code>.</p></div>
-
+    <div id="rjwsacruncher-0-1-1" class="section level1">
+<h1 class="page-header">
+<a href="#rjwsacruncher-0-1-1" class="anchor"></a>rjwsacruncher 0.1.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>functions now compatible with MAC OS and Linux environment.</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
-    </ul>
-
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#rjwsacruncher-0-1-1">0.1.1</a></li>
+      </ul>
+    </div>
   </div>
+
 </div>
 
 
