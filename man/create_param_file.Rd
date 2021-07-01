@@ -29,7 +29,7 @@ create_param_file(
 
 \item{ndecs}{Number of decimals used in the output. By default \code{ndec = 6}.}
 
-\item{policy}{refreshing policy of the processing. Par défaut \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).}
+\item{policy}{refreshing policy of the processing. By default \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).}
 
 \item{output}{Full path of the output folder. By default (\code{output = NULL}) a folder is create in the path to the workspace ([workspace]/Output).}
 
