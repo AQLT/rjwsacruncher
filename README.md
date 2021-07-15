@@ -3,8 +3,7 @@
 
 # rjwsacruncher
 
-[![Travis Build
-Status](https://img.shields.io/travis/AQLT/rjwsacruncher.svg?logo=travis)](https://travis-ci.org/AQLT/rjwsacruncher)
+[![R-CMD-check](https://github.com/AQLT/rjwsacruncher/workflows/R-CMD-check/badge.svg)](https://github.com/AQLT/rjwsacruncher/actions)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)
 [![CRAN last
 release](http://www.r-pkg.org/badges/last-release/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)

@@ -56,6 +56,18 @@ download_cruncher <- function(directory, cruncher_version){
   return(invisible(TRUE))
 }
 
+# Autre possibilité
+# if (missing(cruncher_version)) {
+#   url_gh <- "GET /repos/jdemetra/jwsacruncher/releases/latest"
+# }else{
+#   url_gh <- sprintf("GET /repos/jdemetra/jwsacruncher/releases/tags/v%s",
+#                     cruncher_version)
+# }
+# list_url <- sapply(gh(url_gh)[["assets"]],
+#                    "[[","browser_download_url")
+# release_url <- grep("\\.zip$", list_url, value = TRUE)
+# zip_name <- gsub(".*/", "", release_url)
+
 #' Configure the 'JWSACruncher' with a portable version of 'Java'
 #'
 #' Function configure the 'JWSACruncher' with a portable version of 'Java'.
