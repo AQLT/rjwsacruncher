@@ -54,10 +54,10 @@ portable version with the function `configure_jwsacruncher()`.
 The JWSACruncher can be easily runned with the function
 `cruncher_and_param()`. To use it, the path to the “Bin” folder of the
 JWSACruncher has to be defined. For example, if the JWSACruncher is
-under `D:/jdemetra-cli-2.2.2/`:
+under `D:/jdemetra-cli-2.2.3/`:
 
 ``` r
-options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.2/bin/")
+options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.3/bin/")
 ```
 
 The export items can be changed with the function
@@ -66,8 +66,8 @@ The export items can be changed with the function
 ``` r
 # To get the default values:
 head(getOption("default_matrix_item"))
-#> [1] "period"       "span.start"   "span.end"     "span.n"      
-#> [5] "span.missing" "espan.start"
+#> [1] "period"       "span.start"   "span.end"     "span.n"       "span.missing"
+#> [6] "espan.start"
 getOption("default_tsmatrix_series")
 #> [1] "y"    "t"    "sa"   "s"    "i"    "ycal"
 # To only export the seasonally adjusted series and its forecasts:

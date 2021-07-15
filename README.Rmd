@@ -49,9 +49,9 @@ Since the version 2.2.0, the JWSACruncher needs Java 8 or higher to run. If you 
 
 ## Usage
 
-The JWSACruncher can be easily runned with the function `cruncher_and_param()`. To use it, the path to the "Bin" folder of the JWSACruncher has to be defined. For example, if the JWSACruncher is under `D:/jdemetra-cli-2.2.2/`:
+The JWSACruncher can be easily runned with the function `cruncher_and_param()`. To use it, the path to the "Bin" folder of the JWSACruncher has to be defined. For example, if the JWSACruncher is under `D:/jdemetra-cli-2.2.3/`:
 ```{r, eval = FALSE}
-options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.2/bin/")
+options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.3/bin/")
 ```
 The export items can be changed with the function "default_matrix_item" and "default_tsmatrix_series":
 ```{r, eval = TRUE}
