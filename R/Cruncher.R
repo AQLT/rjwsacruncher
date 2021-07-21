@@ -62,8 +62,8 @@ cruncher <- function(workspace,
         ,"\" -x \""
         , param_file_path,"\""
       ), intern = TRUE)
-    } else if (os == "Darwin") {
-      # Mac OS
+    } else {
+      # Mac OS and linux
       log <- system(paste0(
         "./jwsacruncher \""
         , workspace
