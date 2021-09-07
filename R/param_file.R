@@ -45,7 +45,7 @@ create_param_file <- function(dir_file_param, bundle = 10000, csv_layout = "list
 
     if (!is.null(output)) {
         output <- normalizePath(output)
-        output_line <- paste0("    <output>", gsub("/", "\\", output, fixed = TRUE), "</output>")
+        output_line <- paste0("    <output>", output, "</output>")
     }
 
     if (!is.null(matrix_item)) {
@@ -61,8 +61,9 @@ create_param_file <- function(dir_file_param, bundle = 10000, csv_layout = "list
     }
 
     if (!is.null(paths_path)) {
+        paths_path <- normalizePath(paths_path)
         path_lines <- c("    <paths>",
-                        paste0("        <path>", gsub("/", "\\", paths_path, fixed = TRUE), "</path>"),
+                        paste0("        <path>", paths_path, "</path>"),
                         "    </paths>")
     }
 
