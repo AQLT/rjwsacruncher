@@ -1,6 +1,6 @@
 Package: rjwsacruncher
 Title: Interface to the 'JWSACruncher' of 'JDemetra+'
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(person("Alain", "Quartier-la-Tente", role = c("aut", "cre"),
                  email = "alain.quartier@yahoo.fr",
                  comment = c(ORCID = "0000-0001-7890-3857")),
@@ -20,5 +20,5 @@ Suggests:
 License: GPL-3
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
