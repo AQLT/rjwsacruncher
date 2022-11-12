@@ -1,3 +1,9 @@
+# rjwsacruncher 0.1.3
+
+- `cruncher()` correction for `param_file_path`.
+
+- documentation update
+
 # rjwsacruncher 0.1.2
 
 - Linux compatible path (PR #2).

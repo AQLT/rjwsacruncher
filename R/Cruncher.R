@@ -43,6 +43,8 @@ cruncher <- function(workspace,
         if (length(param_file_path) != 0)
             stop("None or at least 2 .param files are found")
     }
+    param_file_path <- normalizePath(param_file_path)
+    
     workspace <- paste0(workspace,".xml")
 
     if (!all(file.exists(paste0(cruncher_bin_directory,"/jwsacruncher"),
