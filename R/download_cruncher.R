@@ -81,11 +81,11 @@ download_cruncher <- function(directory, cruncher_version){
 #' To do it you have to:
 #' \enumerate{
 #' \item Unzip the downloaded file of the 'JWSACruncher';   
-#' \item Open, with a Text Editor, the file \code{jwsacruncher.bat} that is in the sub-folder \code{\\bin\\} of the 'JWSACruncher';   
+#' \item Open, with a Text Editor, the file \code{jwsacruncher.bat} that is in the sub-folder \code{/bin/} of the 'JWSACruncher';   
 #' \item Edit the line 71 that contains \code{if "\%JAVACMD\%"=="" set JAVACMD=java} and replace \code{java} 
 #' by the path to the file \code{java.exe} of the portable version. For example, if the portable 
-#' version of 'Java' is installed under \code{D:\\Software\\Java}, the path to \code{java.exe} should be at 
-#' \code{D:\\Software\\Java\\bin\\java.exe} and the new line 71 would be 
+#' version of 'Java' is installed under \code{D:/Software/Java}, the path to \code{java.exe} should be at 
+#' \code{D:/Software/Java/bin/java.exe} and the new line 71 would be 
 #' \code{if "\%JAVACMD\%"=="" set JAVACMD="D:\\Software\\Java\\bin\\java.exe"}.
 #' }
 #' The function \code{configure_jwsacruncher()} does the steps 2 and 3.
