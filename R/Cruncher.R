@@ -13,7 +13,7 @@
 #' @export
 cruncher <- function(workspace,
                      cruncher_bin_directory = getOption("cruncher_bin_directory"),
-                     param_file_path, log_file){
+                     param_file_path, log_file = NULL){
     if (is.null(cruncher_bin_directory))
       stop("You must specify the path to the cruncher")
   
@@ -47,11 +47,20 @@ cruncher <- function(workspace,
     
     workspace <- paste0(workspace,".xml")
 
-    if (!all(file.exists(paste0(cruncher_bin_directory,"/jwsacruncher"),
-                        workspace,
-                        param_file_path)))
-        stop("There is an error in the path to the 'JWSACruncher', the workspace or the parameter file")
-
+    if (!file.exists(param_file_path))
+      stop (sprintf("The parameter file %s doesn't exists", param_file_path))
+    if (dir.exists(param_file_path))
+      stop ("The parameter file must be a file and not a directory")
+     
+    if (!file.exists(workspace))
+      stop (sprintf("The workspace %s doesn't exists", workspace)) 
+    
+    if (!file.exists(paste0(cruncher_bin_directory,"/jwsacruncher")))
+      stop (sprintf("JWSACruncher not found in %s.\n Check the installation", paste0(cruncher_bin_directory,"/jwsacruncher"))) 
+  
+    if (!missing(log_file) && !is.null(log_file))
+      log_file <- normalizePath(log_file)
+    
     wd <- getwd()
     setwd(cruncher_bin_directory)
     on.exit(setwd(wd))

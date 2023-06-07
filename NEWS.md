@@ -1,3 +1,7 @@
+# rjwsacruncher 0.1.4
+
+- correction in export of the log file when relative path are given.
+
 # rjwsacruncher 0.1.3
 
 - `cruncher()` correction for `param_file_path`.
