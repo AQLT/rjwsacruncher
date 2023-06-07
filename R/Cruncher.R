@@ -125,8 +125,8 @@ cruncher_and_param <- function(workspace = NULL,
         noms_multi_documents <- multiprocessing_names(workspace)
         if (nrow(noms_multi_documents) == 0)
             stop("No multi-document in the workspace")
-        noms_multi_documents$name <- paste0(output,"\\",noms_multi_documents$name)
-        noms_multi_documents$file <- paste0(output,"\\",noms_multi_documents$file)
+        noms_multi_documents$name <- file.path(output,noms_multi_documents$name)
+        noms_multi_documents$file <- file.path(output, noms_multi_documents$file)
         noms_multi_documents <- noms_multi_documents[noms_multi_documents$name != noms_multi_documents$file,]
 
         if (any(file.exists(noms_multi_documents$name))) {
