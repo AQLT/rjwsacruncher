@@ -1,4 +1,4 @@
-# rjwsacruncher 0.1.4
+# rjwsacruncher 0.2.0
 
 - correction in export of the log file when relative path are given.
 
