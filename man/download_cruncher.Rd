@@ -12,10 +12,10 @@ download_cruncher(
 )
 }
 \arguments{
-\item{directory}{directory where to save the 'JWSACruncher'. In Windows, a dialog box opens
+\item{directory}{Directory where to save the 'JWSACruncher'. In Windows, a dialog box opens
 by default to select the directory.}
 
-\item{cruncher_version}{character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.}
+\item{cruncher_version}{Character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.}
 
 \item{v3}{Boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default
 the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).}

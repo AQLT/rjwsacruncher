@@ -2,9 +2,9 @@
 #'
 #' Function to download the ZIP file of the 'JWSACruncher'
 #'
-#' @param directory directory where to save the 'JWSACruncher'. In Windows, a dialog box opens 
+#' @param directory Directory where to save the 'JWSACruncher'. In Windows, a dialog box opens 
 #' by default to select the directory.
-#' @param cruncher_version character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.
+#' @param cruncher_version Character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.
 #' @param v3 Boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default 
 #' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
 #' @details The 'JWSACruncher' is downloaded from <https://github.com/jdemetra/jwsacruncher/releases> for versions lower than 3.0.0 and from <https://github.com/jdemetra/jdplus-main/releases> for the other versions.
@@ -90,8 +90,8 @@ download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cr
 #'
 #' Function configure the 'JWSACruncher' with a portable version of 'Java'.
 #'
-#' @param jwsacruncher_path path to the file \code{jwsacruncher.bat} of the 'JWSACruncher' (see details).
-#' @param java_path path to the file \code{java.exe} of the portable version of 'Java' (see details).
+#' @param jwsacruncher_path Path to the file \code{jwsacruncher.bat} of the 'JWSACruncher' (see details).
+#' @param java_path Path to the file \code{java.exe} of the portable version of 'Java' (see details).
 #' @details Since the version 2.2.0, the 'JWSACruncher' needs 'Java' 8 or higher to run. 
 #' For versions 3.0.0 and higher, 'JWSACruncher' needs 'Java' 17 or higher.
 #' In 'Windows' versions 3.0.0 and higher of 'JWSACruncher' includes a portable version of 'Java'.

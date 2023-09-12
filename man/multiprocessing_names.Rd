@@ -8,7 +8,7 @@
 multiprocessing_names(workspace)
 }
 \arguments{
-\item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}
+\item{workspace}{Path to the workspace. By default a dialog box opens to choose the workspace.}
 }
 \value{
 A \code{data.frame} containing the name of the multiprocessings that appears on 'JDemetra+' (column \code{name}) and

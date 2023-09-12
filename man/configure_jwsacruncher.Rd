@@ -8,9 +8,9 @@
 configure_jwsacruncher(jwsacruncher_path, java_path)
 }
 \arguments{
-\item{jwsacruncher_path}{path to the file \code{jwsacruncher.bat} of the 'JWSACruncher' (see details).}
+\item{jwsacruncher_path}{Path to the file \code{jwsacruncher.bat} of the 'JWSACruncher' (see details).}
 
-\item{java_path}{path to the file \code{java.exe} of the portable version of 'Java' (see details).}
+\item{java_path}{Path to the file \code{java.exe} of the portable version of 'Java' (see details).}
 }
 \description{
 Function configure the 'JWSACruncher' with a portable version of 'Java'.

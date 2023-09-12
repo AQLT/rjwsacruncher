@@ -2,10 +2,10 @@
 #'
 #' To run the 'JWSACruncher' needs a parameter file and \code{create_param_file} allows to create it.
 #'
-#' @param dir_file_param Path to the directory that will contains the parameter file "parameters.param".
+#' @param dir_file_param Path to the directory that will contains the parameter file \code{"parameters.param"}.
 #' @param bundle Maximum size for a group of series (in output). By default \code{bundle = 10000}.
 #' @param csv_layout Layout of the CSV files (series only). By default \code{csv_layout = "list"}. Other options: \code{csv_layout = "vtable"} (vertical table) or \code{csv_layout = "htable"} (horizontal table).
-#' @param csv_separator the field separator string used in the CSV file. By default \code{csv_separator = ";"}.
+#' @param csv_separator The field separator string used in the CSV file. By default \code{csv_separator = ";"}.
 #' @param ndecs Number of decimals used in the output. By default \code{ndec = 6}.
 #' @param full_series_name Boolean indicating if the fully qualified name of the series will be used (the default \code{full_series_name = TRUE}) or if only the name of the series  should be displayed.
 #' Only used when \code{v3 = TRUE}.
@@ -13,7 +13,7 @@
 #' @param policy Refreshing policy of the processing. By default \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).
 #' @param refreshall Boolean indicating if the data is refreshed (by default `refreshall = TRUE`).
 #' @param output Full path of the output folder. By default (\code{output = NULL}) a folder is create in the path to the workspace (\[workspace\]/Output).
-#' @param matrix_item character containing the items of the matrix output (see the 'JDemetra+' manual for more information). By default, the items defined in the option \code{getOption("default_matrix_item")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).
+#' @param matrix_item Character containing the items of the matrix output (see the 'JDemetra+' manual for more information). By default, the items defined in the option \code{getOption("default_matrix_item")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).
 #' @param tsmatrix_series Character containing the names of the times series to export (see the 'JDemetra+' manual for more information).  By default, the items defined in the option \code{getOption("default_tsmatrix_series")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).
 #' @param paths_path The paths used for relative addresses (see the "Demetra Paths" of the graphical interface of 'JDemetra+').
 #' @param v3 Boolean indicating if the parameter file should be compatible with a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default 

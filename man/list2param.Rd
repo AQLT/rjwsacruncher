@@ -7,7 +7,7 @@
 list2param(dir_file_param, x)
 }
 \arguments{
-\item{dir_file_param}{Path to the directory that will contains the parameter file "parameters.param".}
+\item{dir_file_param}{Path to the directory that will contains the parameter file \code{"parameters.param"}.}
 
 \item{x}{A list, for example create by \code{\link{read_param_file}} or \code{\link{default_param_file}}.}
 }

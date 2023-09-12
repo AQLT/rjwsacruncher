@@ -23,13 +23,13 @@ create_param_file(
 )
 }
 \arguments{
-\item{dir_file_param}{Path to the directory that will contains the parameter file "parameters.param".}
+\item{dir_file_param}{Path to the directory that will contains the parameter file \code{"parameters.param"}.}
 
 \item{bundle}{Maximum size for a group of series (in output). By default \code{bundle = 10000}.}
 
 \item{csv_layout}{Layout of the CSV files (series only). By default \code{csv_layout = "list"}. Other options: \code{csv_layout = "vtable"} (vertical table) or \code{csv_layout = "htable"} (horizontal table).}
 
-\item{csv_separator}{the field separator string used in the CSV file. By default \code{csv_separator = ";"}.}
+\item{csv_separator}{The field separator string used in the CSV file. By default \code{csv_separator = ";"}.}
 
 \item{ndecs}{Number of decimals used in the output. By default \code{ndec = 6}.}
 
@@ -44,7 +44,7 @@ Only used when \code{v3 = TRUE}.}
 
 \item{output}{Full path of the output folder. By default (\code{output = NULL}) a folder is create in the path to the workspace ([workspace]/Output).}
 
-\item{matrix_item}{character containing the items of the matrix output (see the 'JDemetra+' manual for more information). By default, the items defined in the option \code{getOption("default_matrix_item")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).}
+\item{matrix_item}{Character containing the items of the matrix output (see the 'JDemetra+' manual for more information). By default, the items defined in the option \code{getOption("default_matrix_item")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).}
 
 \item{tsmatrix_series}{Character containing the names of the times series to export (see the 'JDemetra+' manual for more information).  By default, the items defined in the option \code{getOption("default_tsmatrix_series")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).}
 

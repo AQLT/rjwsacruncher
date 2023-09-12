@@ -2,11 +2,11 @@
 #'
 #' Function to run the 'JWSACruncher' on a workspace from a parameter file.
 #'
-#' @param workspace path to the workspace. By default a dialog box opens to choose the workspace.
-#' @param cruncher_bin_directory path to the "bin" directory of the 'JWSACruncher'. By default 
+#' @param workspace Path to the workspace. By default a dialog box opens to choose the workspace.
+#' @param cruncher_bin_directory Path to the "bin" directory of the 'JWSACruncher'. By default 
 #' the value of the option \code{"cruncher_bin_directory"} is used.
-#' @param param_file_path path to the parameter file of the 'JWSACruncher' By default a .params file is search in the save directory of the workspace.
-#' @param log_file name of the log file of 'JWSACruncher'. By default the log isn't exported.
+#' @param param_file_path Path to the parameter file of the 'JWSACruncher' By default a .params file is search in the save directory of the workspace.
+#' @param log_file Name of the log file of 'JWSACruncher'. By default the log isn't exported.
 #' @encoding UTF-8
 #' @return The path to the workspace.
 #' @seealso \code{\link{cruncher_and_param}}, \code{\link{update_workspace}}.
@@ -98,9 +98,9 @@ cruncher <- function(workspace,
 #' @param rename_multi_documents Boolean indicating whether to rename the folders 
 #' containing the outputs according to the names of the multi-documents of the workspace. 
 #' By default \code{rename_multi_documents = FALSE}: the names of the XML files of the multi-documents are used.
-#' @param delete_existing_file only used if \code{rename_multi_documents = TRUE}. Boolean indicating whether to 
+#' @param delete_existing_file Only used if \code{rename_multi_documents = TRUE}. Boolean indicating whether to 
 #' delete existing folders when renaming them. By default (\code{delete_existing_file = FALSE}) they are not deleted.
-#' @param ... other parameters of \link{create_param_file}.
+#' @param ... Other parameters of \link{create_param_file}.
 #' @seealso \code{\link{cruncher}}, \code{\link{update_workspace}}, \code{\link{create_param_file}}, \code{\link{multiprocessing_names}}.
 #' @encoding UTF-8
 #' @return Path to the workspace.
