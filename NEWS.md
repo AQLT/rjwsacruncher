@@ -6,9 +6,9 @@
 
 - `download_cruncher()` now compatible with version higher than 3.0.0.
 
-- new parameters in `create_param_file()`
+- new parameters in `create_param_file()`.
 
-- new functions `read_param_file()` and `default_param_file()`. 
+- new functions `read_param_file()`, `default_param_file()` and `list2param()`. 
 
 # rjwsacruncher 0.1.3
 

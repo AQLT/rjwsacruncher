@@ -7,7 +7,7 @@
 default_param_file(v3 = getOption("is_cruncher_v3"))
 }
 \arguments{
-\item{v3}{boolean indicating if the parameters are the from a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default
+\item{v3}{Boolean indicating if the parameters are the from a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default
 the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).}
 }
 \description{

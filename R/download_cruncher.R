@@ -5,7 +5,7 @@
 #' @param directory directory where to save the 'JWSACruncher'. In Windows, a dialog box opens 
 #' by default to select the directory.
 #' @param cruncher_version character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.
-#' @param v3 boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default 
+#' @param v3 Boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default 
 #' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
 #' @details The 'JWSACruncher' is downloaded from <https://github.com/jdemetra/jwsacruncher/releases> for versions lower than 3.0.0 and from <https://github.com/jdemetra/jdplus-main/releases> for the other versions.
 #'  To use it, it has to be unzip.

@@ -7,7 +7,7 @@
 read_param_file(file)
 }
 \arguments{
-\item{file}{path to the parameter file.}
+\item{file}{Path to the parameter file.}
 }
 \description{
 Create parameter file for the 'JWSACruncher'

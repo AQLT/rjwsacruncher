@@ -7,17 +7,16 @@
 #' @param csv_layout Layout of the CSV files (series only). By default \code{csv_layout = "list"}. Other options: \code{csv_layout = "vtable"} (vertical table) or \code{csv_layout = "htable"} (horizontal table).
 #' @param csv_separator the field separator string used in the CSV file. By default \code{csv_separator = ";"}.
 #' @param ndecs Number of decimals used in the output. By default \code{ndec = 6}.
-#' @param full_series_name boolean indicating if the fully qualified name of the series will be used (the default \code{full_series_name = TRUE}) or if only the name of the series  should be displayed.
+#' @param full_series_name Boolean indicating if the fully qualified name of the series will be used (the default \code{full_series_name = TRUE}) or if only the name of the series  should be displayed.
 #' Only used when \code{v3 = TRUE}.
-#' @param rslt_name_level description.
-#' Only used when \code{v3 = TRUE}.
-#' @param policy refreshing policy of the processing. By default \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).
-#' @param refreshall boolean indicating if the data is refreshed (by default `refreshall = TRUE`).
+#' @param rslt_name_level Only used when \code{v3 = TRUE}.
+#' @param policy Refreshing policy of the processing. By default \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).
+#' @param refreshall Boolean indicating if the data is refreshed (by default `refreshall = TRUE`).
 #' @param output Full path of the output folder. By default (\code{output = NULL}) a folder is create in the path to the workspace (\[workspace\]/Output).
 #' @param matrix_item character containing the items of the matrix output (see the 'JDemetra+' manual for more information). By default, the items defined in the option \code{getOption("default_matrix_item")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).
-#' @param tsmatrix_series character containing the names of the times series to export (see the 'JDemetra+' manual for more information).  By default, the items defined in the option \code{getOption("default_tsmatrix_series")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).
+#' @param tsmatrix_series Character containing the names of the times series to export (see the 'JDemetra+' manual for more information).  By default, the items defined in the option \code{getOption("default_tsmatrix_series")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).
 #' @param paths_path The paths used for relative addresses (see the "Demetra Paths" of the graphical interface of 'JDemetra+').
-#' @param v3 boolean indicating if the parameter file should be compatible with a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default 
+#' @param v3 Boolean indicating if the parameter file should be compatible with a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default 
 #' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
 #' @details When the 'JWSACruncher' is launched, the data is refreshed with a specific policy that is defined by the parameter \code{policy}. The available options are:
 #' \itemize{
@@ -95,7 +94,7 @@ create_param_file <- function(
 
 #' Create parameter file for the 'JWSACruncher'
 #' 
-#' @param file path to the parameter file.
+#' @param file Path to the parameter file.
 #' @export
 read_param_file <- function(file){
   f <- readLines(file)
@@ -176,7 +175,7 @@ read_param_file <- function(file){
 #' Create parameter file from list
 #' 
 #' @inheritParams create_param_file
-#' @param x a list, for example create by \code{\link{read_param_file}} or \code{\link{default_param_file}}.
+#' @param x A list, for example create by \code{\link{read_param_file}} or \code{\link{default_param_file}}.
 #'@export
 list2param <- function(dir_file_param, x){
   config <- x$config
@@ -189,7 +188,7 @@ list2param <- function(dir_file_param, x){
 
 #' Get default parameters of the 'JWSACruncher'
 #' 
-#' @param v3 boolean indicating if the parameters are the from a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default 
+#' @param v3 Boolean indicating if the parameters are the from a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default 
 #' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
 #' @export
 default_param_file <- function(v3 = getOption("is_cruncher_v3")){

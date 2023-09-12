@@ -15,7 +15,7 @@ update_workspace(
 \arguments{
 \item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}
 
-\item{policy}{refreshing policy of the processing. By default \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).}
+\item{policy}{Refreshing policy of the processing. By default \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).}
 
 \item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. By default
 the value of the option \code{"cruncher_bin_directory"} is used.}
