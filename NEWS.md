@@ -4,6 +4,12 @@
 
 - `cruncher_and_param()` correction in linux when `rename_multi_documents = TRUE`.
 
+- `download_cruncher()` now compatible with version higher than 3.0.0.
+
+- new parameters in `create_param_file()`
+
+- new functions `read_param_file()` and `default_param_file()`. 
+
 # rjwsacruncher 0.1.3
 
 - `cruncher()` correction for `param_file_path`.

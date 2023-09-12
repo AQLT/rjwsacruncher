@@ -3,7 +3,7 @@
 \encoding{UTF-8}
 \name{create_param_file}
 \alias{create_param_file}
-\title{Create paramater file for the 'JWSACruncher'}
+\title{Create parameter file for the 'JWSACruncher'}
 \usage{
 create_param_file(
   dir_file_param,
@@ -11,11 +11,15 @@ create_param_file(
   csv_layout = "list",
   csv_separator = ";",
   ndecs = 6,
+  full_series_name = TRUE,
+  rslt_name_level = 2,
   policy = "parameters",
+  refreshall = TRUE,
   output = NULL,
   matrix_item = getOption("default_matrix_item"),
   tsmatrix_series = getOption("default_tsmatrix_series"),
-  paths_path = NULL
+  paths_path = NULL,
+  v3 = getOption("is_cruncher_v3")
 )
 }
 \arguments{
@@ -29,7 +33,15 @@ create_param_file(
 
 \item{ndecs}{Number of decimals used in the output. By default \code{ndec = 6}.}
 
+\item{full_series_name}{boolean indicating if the fully qualified name of the series will be used (the default \code{full_series_name = TRUE}) or if only the name of the series  should be displayed.
+Only used when \code{v3 = TRUE}.}
+
+\item{rslt_name_level}{description.
+Only used when \code{v3 = TRUE}.}
+
 \item{policy}{refreshing policy of the processing. By default \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).}
+
+\item{refreshall}{boolean indicating if the data is refreshed (by default \code{refreshall = TRUE}).}
 
 \item{output}{Full path of the output folder. By default (\code{output = NULL}) a folder is create in the path to the workspace ([workspace]/Output).}
 
@@ -38,15 +50,18 @@ create_param_file(
 \item{tsmatrix_series}{character containing the names of the times series to export (see the 'JDemetra+' manual for more information).  By default, the items defined in the option \code{getOption("default_tsmatrix_series")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).}
 
 \item{paths_path}{The paths used for relative addresses (see the "Demetra Paths" of the graphical interface of 'JDemetra+').}
+
+\item{v3}{boolean indicating if the parameter file should be compatible with a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default
+the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).}
 }
 \value{
-Path to the paramater file.
+Path to the parameter file.
 }
 \description{
 To run the 'JWSACruncher' needs a parameter file and \code{create_param_file} allows to create it.
 }
 \details{
-When the 'JWSACruncher' is launched, the data is refreshed with a specific policy that is defined by the paramater \code{policy}. The available options are:
+When the 'JWSACruncher' is launched, the data is refreshed with a specific policy that is defined by the parameter \code{policy}. The available options are:
 \itemize{
 \item \code{policy = "current"}: all the estimations are fixed;
 \item \code{policy = "fixedparameters"} or \code{policy = "fixed"}: re-estimation of the coefficients of the regression variables (but not the ARIMA coefficients);

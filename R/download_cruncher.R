@@ -5,7 +5,10 @@
 #' @param directory directory where to save the 'JWSACruncher'. In Windows, a dialog box opens 
 #' by default to select the directory.
 #' @param cruncher_version character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.
-#' @details The 'JWSACruncher' is downloaded from <https://github.com/jdemetra/jwsacruncher/releases>. To use it, it has to be unzip.
+#' @param v3 boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default 
+#' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
+#' @details The 'JWSACruncher' is downloaded from <https://github.com/jdemetra/jwsacruncher/releases> for versions lower than 3.0.0 and from <https://github.com/jdemetra/jdplus-main/releases> for the other versions.
+#'  To use it, it has to be unzip.
 #' @encoding UTF-8
 #' @examples \dontrun{
 #' # On Windows opens a dialog box to choose the directory where to
@@ -21,7 +24,7 @@
 #' }
 #' @seealso \code{\link{configure_jwsacruncher}}.
 #' @export
-download_cruncher <- function(directory, cruncher_version){
+download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cruncher_v3")){
   if (missing(directory)) {
     if (Sys.info()[['sysname']] == "Windows") {
       directory <- utils::choose.dir(caption = "Choose to directory where to download the 'JWSACruncher'")
@@ -34,11 +37,21 @@ download_cruncher <- function(directory, cruncher_version){
     }
   }
   
-  if (missing(cruncher_version)) {
-    url_release <- "https://api.github.com/repos/jdemetra/jwsacruncher/releases/latest"
+  if (missing(cruncher_version)) { 
+    if (v3) {
+      url_release <- "https://api.github.com/repos/jdemetra/jdplus-main/releases/latest"
+    } else {
+      url_release <- "https://api.github.com/repos/jdemetra/jwsacruncher/releases/latest"
+    }
   }else{
-    url_release <- sprintf("https://api.github.com/repos/jdemetra/jwsacruncher/releases/tags/v%s",
-                           cruncher_version)
+    v3 <- cruncher_version >= "3.0.0"
+    if (v3) {
+      url_release <- sprintf("https://api.github.com/repos/jdemetra/jdplus-main/releases/tags/v%s",
+                             cruncher_version)
+    } else {
+      url_release <- sprintf("https://api.github.com/repos/jdemetra/jwsacruncher/releases/tags/v%s",
+                             cruncher_version)
+    }
   }
  
   tryCatch(release_url <- readLines(url_release,
@@ -51,6 +64,11 @@ download_cruncher <- function(directory, cruncher_version){
   release_url <- gsub("^.*browser_download_url\":\"", "", release_url)
   release_url <- gsub("\".*", "", release_url)
   release_url <- grep("\\.zip$", release_url, value = TRUE)
+  release_url <- grep("jwsacruncher", release_url, value = TRUE)
+  if (v3) {
+    release_url <- grep("windows", release_url, value = TRUE,
+                        invert = Sys.info()[['sysname']] != "Windows")
+  }
   zip_name <- gsub(".*/", "", release_url)
   utils::download.file(release_url, file.path(directory, zip_name))
   return(invisible(TRUE))
@@ -75,8 +93,9 @@ download_cruncher <- function(directory, cruncher_version){
 #' @param jwsacruncher_path path to the file \code{jwsacruncher.bat} of the 'JWSACruncher' (see details).
 #' @param java_path path to the file \code{java.exe} of the portable version of 'Java' (see details).
 #' @details Since the version 2.2.0, the 'JWSACruncher' needs 'Java' 8 or higher to run. 
-#' For versions 3.0.0 and higher,'JWSACruncher' needs 'Java' 17 or higher.
-#' If you cannot install it (for example for security reasons) you can install a portable version of 'Java' 
+#' For versions 3.0.0 and higher, 'JWSACruncher' needs 'Java' 17 or higher.
+#' In 'Windows' versions 3.0.0 and higher of 'JWSACruncher' includes a portable version of 'Java'.
+#' For lower version of 'JWSACruncher', if you cannot install 'Java' (for example for security reasons) you can install a portable version of 'Java' 
 #' (that does not require administrator rights) and configure the 'JWSACruncher' to use this portable version. 
 #' To do it you have to:
 #' \enumerate{

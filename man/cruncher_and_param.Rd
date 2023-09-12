@@ -29,7 +29,7 @@ delete existing folders when renaming them. By default (\code{delete_existing_fi
 
 \item{log_file}{name of the log file of 'JWSACruncher'. By default the log isn't exported.}
 
-\item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. By default default
+\item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. By default
 the value of the option \code{"cruncher_bin_directory"} is used.}
 
 \item{...}{other parameters of \link{create_param_file}.}

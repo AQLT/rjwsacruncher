@@ -3,7 +3,7 @@
 #' Function to run the 'JWSACruncher' on a workspace from a parameter file.
 #'
 #' @param workspace path to the workspace. By default a dialog box opens to choose the workspace.
-#' @param cruncher_bin_directory path to the "bin" directory of the 'JWSACruncher'. By default default 
+#' @param cruncher_bin_directory path to the "bin" directory of the 'JWSACruncher'. By default 
 #' the value of the option \code{"cruncher_bin_directory"} is used.
 #' @param param_file_path path to the parameter file of the 'JWSACruncher' By default a .params file is search in the save directory of the workspace.
 #' @param log_file name of the log file of 'JWSACruncher'. By default the log isn't exported.

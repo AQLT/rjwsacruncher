@@ -9,13 +9,13 @@ cruncher(
   workspace,
   cruncher_bin_directory = getOption("cruncher_bin_directory"),
   param_file_path,
-  log_file
+  log_file = NULL
 )
 }
 \arguments{
 \item{workspace}{path to the workspace. By default a dialog box opens to choose the workspace.}
 
-\item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. By default default
+\item{cruncher_bin_directory}{path to the "bin" directory of the 'JWSACruncher'. By default
 the value of the option \code{"cruncher_bin_directory"} is used.}
 
 \item{param_file_path}{path to the parameter file of the 'JWSACruncher' By default a .params file is search in the save directory of the workspace.}

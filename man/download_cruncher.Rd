@@ -5,19 +5,27 @@
 \alias{download_cruncher}
 \title{Dowload the 'JWSACruncher'}
 \usage{
-download_cruncher(directory, cruncher_version)
+download_cruncher(
+  directory,
+  cruncher_version,
+  v3 = getOption("is_cruncher_v3")
+)
 }
 \arguments{
 \item{directory}{directory where to save the 'JWSACruncher'. In Windows, a dialog box opens
 by default to select the directory.}
 
 \item{cruncher_version}{character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.}
+
+\item{v3}{boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default
+the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).}
 }
 \description{
 Function to download the ZIP file of the 'JWSACruncher'
 }
 \details{
-The 'JWSACruncher' is downloaded from \url{https://github.com/jdemetra/jwsacruncher/releases}. To use it, it has to be unzip.
+The 'JWSACruncher' is downloaded from \url{https://github.com/jdemetra/jwsacruncher/releases} for versions lower than 3.0.0 and from \url{https://github.com/jdemetra/jdplus-main/releases} for the other versions.
+To use it, it has to be unzip.
 }
 \examples{
 \dontrun{

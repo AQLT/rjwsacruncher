@@ -79,5 +79,8 @@
         options(default_tsmatrix_series = c("y", "t","sa","s","i","ycal"))
     if(is.null(getOption("cruncher_bin_directory")))
         options(cruncher_bin_directory = NULL)
-
+  
+  if(is.null(getOption("is_cruncher_v3")))
+    options(is_cruncher_v3 = FALSE)
+  
 }
