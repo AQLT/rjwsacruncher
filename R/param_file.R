@@ -56,7 +56,7 @@ create_param_file <- function(
   }
   param_line <- paste(param_line,">", sep = "\"")
   policy_line <- paste0("    <policy>", policy, "</policy>")
-  refresh_line <- paste0("    <refreshall>", ifelse(refreshall, '"true"', '"false"'), "</refreshall>")
+  refresh_line <- paste0("    <refreshall>", ifelse(refreshall, 'true', 'false'), "</refreshall>")
   
   output_line <- matrix_lines <- tsmatrix_lines <- path_lines <- NULL
   

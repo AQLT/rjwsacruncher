@@ -5,7 +5,7 @@
 #' @param workspace Path to the workspace. By default a dialog box opens to choose the workspace.
 #' @param cruncher_bin_directory Path to the "bin" directory of the 'JWSACruncher'. By default 
 #' the value of the option \code{"cruncher_bin_directory"} is used.
-#' @param param_file_path Path to the parameter file of the 'JWSACruncher' By default a .params file is search in the save directory of the workspace.
+#' @param param_file_path Path to the parameter file of the 'JWSACruncher'. By default a .params file is search in the save directory of the workspace.
 #' @param log_file Name of the log file of 'JWSACruncher'. By default the log isn't exported.
 #' @encoding UTF-8
 #' @return The path to the workspace.
@@ -59,7 +59,7 @@ cruncher <- function(workspace,
       stop (sprintf("JWSACruncher not found in %s.\n Check the installation", paste0(cruncher_bin_directory,"/jwsacruncher"))) 
   
     if (!missing(log_file) && !is.null(log_file))
-      log_file <- normalizePath(log_file)
+      log_file <- normalizePath(log_file, mustWork = FALSE)
     
     wd <- getwd()
     setwd(cruncher_bin_directory)

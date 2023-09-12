@@ -18,7 +18,7 @@ cruncher(
 \item{cruncher_bin_directory}{Path to the "bin" directory of the 'JWSACruncher'. By default
 the value of the option \code{"cruncher_bin_directory"} is used.}
 
-\item{param_file_path}{Path to the parameter file of the 'JWSACruncher' By default a .params file is search in the save directory of the workspace.}
+\item{param_file_path}{Path to the parameter file of the 'JWSACruncher'. By default a .params file is search in the save directory of the workspace.}
 
 \item{log_file}{Name of the log file of 'JWSACruncher'. By default the log isn't exported.}
 }
