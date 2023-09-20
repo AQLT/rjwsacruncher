@@ -19,15 +19,20 @@ library(knitr)
 
 # Launch the 'JWSACruncher"
 
-To use `rjwsacruncher` you need to download the JWACruncher. It is available on <https://github.com/jdemetra/jdemetra-app/releases> or can be downloaded with the function `download_cruncher()`:
+To use `rjwsacruncher` you need to download the JWACruncher. 
+It is available on <https://github.com/jdemetra/jdemetra-app/releases> (for JDemetra+ 2.x.y versions) or <https://github.com/jdemetra/jdemetra-app/releases> (for JDemetra+ 3.x.y versions).
+It can also be downloaded with the function `download_cruncher()`:
 ```{r, eval = FALSE}
 library(rjwsacruncher)
 # Directory where to save the JWSACruncher:
 directory <- tempdir()
 download_cruncher(directory)
+# for JDemetra+ 3.x.y versions :
+download_cruncher(directory, v3 = TRUE)
 ```
 
-To configure the JWSACruncher with a portable version of Java you can use the function `configure_jwsacruncher()`. See `?configure_jwsacruncher` for more informations.
+To configure the JWSACruncher with a portable version of Java you can use the function `configure_jwsacruncher()`. 
+See `?configure_jwsacruncher` for more informations.
 
 To run the JWSACruncher you need three files:
 
@@ -37,15 +42,14 @@ To run the JWSACruncher you need three files:
 
 In rjwsacruncher, there are four functions associated to run the JWSACruncher:  
 
-- `create_param_file()` to create the ".param" parameter file;  
+- `create_param_file()` or `list2param_file()` to create the ".param" parameter file;  
 - `cruncher()` to run the JWSACruncher on a workspace from a parameter file;  
 - `cruncher_and_param()` to run the 'JWSACruncher' on a workspace while creating the parameter file;
 - `update_workspace()` to update a workspace without exporting the results.
 
 ## Create the parameter file with `create_param_file()`
 
-The parameters of the function `create_param_file()` 
-are those described in the wiki of the JWSACruncher: <https://github.com/jdemetra/jwsacruncher/wiki>. 
+The parameters of the function `create_param_file()` are those described in the wiki of the JWSACruncher: <https://github.com/jdemetra/jwsacruncher/wiki>. 
 The three most important parameters of `create_param_file()` are:  
 
 1. `policy` the refresh policy (see table below).
@@ -98,11 +102,11 @@ options(default_tsmatrix_series = c("sa", "sa_f"))
 ```
 
 For more informations, see the help of the function: `?create_param_file`. Below some examples to create the parameter file:
-```{r, eval = FALSE}
+```{r, eval = TRUE}
 export_dir <- tempdir()
 # To create the file parameters.params in the directory export_dir with
 # the refresh policy "lastoutliers" and the others default parameters:
-create_param_file(dir_file_param = "D:/",
+create_param_file(dir_file_param = export_dir,
                   policy = "lastoutliers")
 
 # If the options "default_matrix_item" and "default_tsmatrix_series" were
@@ -114,12 +118,21 @@ create_param_file(dir_file_param = export_dir,
                   tsmatrix_series = c("sa", "sa_f"))
 ```
 
+Parameter files can be read with `read_param_file()` which returns a list than can also be modified and exported with `list2param_file()`:
+
+```{r, eval = TRUE}
+export_dir <- read_param_file(file.path(export_dir, "parameters.param"))
+str(export_dir)
+```
+The default parameters files of JDemetra+ 2.x.y and JDemetra+ 3.x.y can be retrieved with `default_param_file()`.
+
 ## To run the JWSACruncher
 
-To run the JWSACruncher with `cruncher()` or `cruncher_and_param()`, 
-you have to specify the path to the JWSACruncher (`cruncher_bin_directory` parameter) and the path to the workspace (`workspace` parameter).
+To run the JWSACruncher with `cruncher()` or `cruncher_and_param()`, you have to specify the path to the JWSACruncher (`cruncher_bin_directory` parameter) and the path to the workspace (`workspace` parameter).
 
-By default, the path to the JWSACruncher is the value of the option `cruncher_bin_directory`: therefore you only have to change this option once so that it applies to all the future running. The path to specify is the folder containing the *jwsacruncher.bat* file which is under the "Bin" folder of the JWSACruncher. Thus, if it is installed in `D:\jdemetra-cli-2.2.2`, the file *jwsacruncher.bat* will be under `D:\jdemetra-cli-2.2.2\bin` and you have to change the `cruncher_bin_directory` option as follows:
+By default, the path to the JWSACruncher is the value of the option `cruncher_bin_directory`: therefore you only have to change this option once so that it applies to all the future running. 
+The path to specify is the folder containing the *jwsacruncher.bat* file which is under the "Bin" folder of the JWSACruncher. 
+Thus, if it is installed in `D:\jdemetra-cli-2.2.2`, the file *jwsacruncher.bat* will be under `D:\jdemetra-cli-2.2.2\bin` and you have to change the `cruncher_bin_directory` option as follows:
 
 ```{r, eval = FALSE}
 options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.2/bin/")
@@ -127,7 +140,9 @@ options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.2/bin/")
 
 If no workspace is specified, a dialog box opens to select it.
 
-The `cruncher_and_param()` function allows to create a temporary parameter file with `create_param_file()` and then run the JWSACruncher with `cruncher()`. In addition to the parameters available in these two functions, `cruncher_and_param()` allows to rename the output folder containing the workspace results so that they are equal to the names of the multi-documents displayed in the JDemetra+ software with the parameter `rename_multi_documents` (equals to `FALSE` by default). Below are some examples:
+The `cruncher_and_param()` function allows to create a temporary parameter file with `create_param_file()` and then run the JWSACruncher with `cruncher()`. 
+In addition to the parameters available in these two functions, `cruncher_and_param()` allows to rename the output folder containing the workspace results so that they are equal to the names of the multi-documents displayed in the JDemetra+ software with the parameter `rename_multi_documents` (equals to `FALSE` by default). 
+Below are some examples:
 
 ```{r, eval = FALSE}
 # The following code updates the workspace "workspace", that is under the folder D:/, 
