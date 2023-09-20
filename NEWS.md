@@ -8,18 +8,17 @@
 
 - new parameters in `create_param_file()`.
 
-- new functions `read_param_file()`, `default_param_file()` and `list2param()`. 
+- new functions `read_param_file()`, `default_param_file()` and `list2param_file()`. 
 
 # rjwsacruncher 0.1.3
 
 - `cruncher()` correction for `param_file_path`.
 
-- documentation update
+- documentation update.
 
 # rjwsacruncher 0.1.2
 
 - Linux compatible path (PR #2).
-
 
 # rjwsacruncher 0.1.1
 
