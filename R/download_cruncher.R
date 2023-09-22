@@ -136,7 +136,7 @@ configure_jwsacruncher <- function(jwsacruncher_path, java_path){
       java_path <- base::file.choose()
     }
   }
-  jwsacruncher_path <- normalizePath(jwsacruncher_path, mustWork = TRUE)
+  jwsacruncher_path <- full_path(jwsacruncher_path)
   jwsacruncher <- readLines(jwsacruncher_path)
   line_to_change <- grep('if "%JAVACMD%"=="" set JAVACMD=', jwsacruncher)
   if (length(line_to_change) == 0)
@@ -149,7 +149,7 @@ configure_jwsacruncher <- function(jwsacruncher_path, java_path){
                 "\nDownload again the 'JWSACruncher'"))
   
   java_path <- gsub("/","\\\\",
-                    normalizePath(java_path, mustWork = TRUE, winslash = "/"))
+                    full_path(java_path))
   jwsacruncher[line_to_change] <- paste0('if "%JAVACMD%"=="" set JAVACMD=',
                                          java_path)
   writeLines(jwsacruncher, jwsacruncher_path)

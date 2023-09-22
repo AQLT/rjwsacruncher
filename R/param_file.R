@@ -61,7 +61,7 @@ create_param_file <- function(
   output_line <- matrix_lines <- tsmatrix_lines <- path_lines <- NULL
   
   if (!is.null(output)) {
-    output <- normalizePath(output)
+    output <- full_path(output)
     output_line <- paste0("    <output>", output, "</output>")
   }
   
@@ -78,7 +78,7 @@ create_param_file <- function(
   }
   
   if (!is.null(paths_path)) {
-    paths_path <- normalizePath(paths_path)
+    paths_path <- full_path(paths_path)
     path_lines <- c("    <paths>",
                     paste0("        <path>", paths_path, "</path>"),
                     "    </paths>")
