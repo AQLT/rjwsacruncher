@@ -102,7 +102,8 @@ getOption("default_tsmatrix_series")
 options(default_tsmatrix_series = c("sa", "sa_f"))
 ```
 
-For more informations, see the help of the function: `?create_param_file`. Below some examples to create the parameter file:
+For more informations, see the help of the function: `?create_param_file`. 
+Below some examples to create the parameter file:
 ```{r, eval = TRUE}
 export_dir <- tempdir()
 # To create the file parameters.params in the directory export_dir with
@@ -122,8 +123,8 @@ create_param_file(dir_file_param = export_dir,
 Parameter files can be read with `read_param_file()` which returns a list than can also be modified and exported with `list2param_file()`:
 
 ```{r, eval = TRUE}
-export_dir <- read_param_file(file.path(export_dir, "parameters.param"))
-str(export_dir)
+param_f <- read_param_file(file.path(export_dir, "parameters.param"))
+str(param_f)
 ```
 The default parameters files of JDemetra+ 2.x.y and JDemetra+ 3.x.y can be retrieved with `default_param_file()`.
 
