@@ -13,3 +13,6 @@ the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} 
 \description{
 Get default parameters of the 'JWSACruncher'
 }
+\seealso{
+\code{\link[=create_param_file]{create_param_file()}}, \code{\link[=read_param_file]{read_param_file()}}, \code{\link[=list2param_file]{list2param_file()}}, \code{\link[=cruncher_and_param]{cruncher_and_param()}}.
+}

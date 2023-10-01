@@ -28,6 +28,20 @@ The path to the workspace.
 \description{
 Function to run the 'JWSACruncher' on a workspace from a parameter file.
 }
+\examples{
+\dontrun{
+dir = tempdir()
+# First create a parameter file
+# here a file parameters.param is created in the directory dir
+# with default parameters of 'JWSACruncher' v2
+list2param_file(dir, default_param_file(v3 = FALSE))
+# If the option "cruncher_bin_directory" is correctly defined:
+cruncher("workspace.xml",
+          param_file_path = file.path(dir, "parameters.param"))
+}
+
+}
 \seealso{
-\code{\link{cruncher_and_param}}, \code{\link{update_workspace}}.
+Around the 'JWSACruncher': \code{\link[=cruncher_and_param]{cruncher_and_param()}}, \code{\link[=update_workspace]{update_workspace()}}.
+To create the parameter file: \code{\link[=create_param_file]{create_param_file()}} and \code{\link[=list2param_file]{list2param_file()}}.
 }

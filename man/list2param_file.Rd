@@ -9,8 +9,23 @@ list2param_file(dir_file_param, x)
 \arguments{
 \item{dir_file_param}{Path to the directory that will contains the parameter file \code{"parameters.param"}.}
 
-\item{x}{A list, for example create by \code{\link{read_param_file}} or \code{\link{default_param_file}}.}
+\item{x}{A list, for example create by \code{\link[=read_param_file]{read_param_file()}} or \code{\link[=default_param_file]{default_param_file()}}.}
 }
 \description{
 Create parameter file from list
+}
+\examples{
+\dontrun{
+dir = tempdir()
+# Here a file parameters.param is created in the directory dir
+# with default parameters of 'JWSACruncher' v2
+list_param <- default_param_file(v3 = FALSE)
+list2param_file(dir, list_param)
+# to only export the raw and the seasonally adjusted series
+list_param$tsmatrix_series <- c("y", "sa")
+list2param_file(dir, list_param)
+}
+}
+\seealso{
+\code{\link[=create_param_file]{create_param_file()}}, \code{\link[=read_param_file]{read_param_file()}}, \code{\link[=default_param_file]{default_param_file()}} \code{\link[=cruncher_and_param]{cruncher_and_param()}}.
 }

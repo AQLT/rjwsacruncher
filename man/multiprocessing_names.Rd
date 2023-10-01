@@ -18,5 +18,5 @@ the name of the associated XML files (column \code{file}).
 Function to get the name of the multiprocessings that appears on 'JDemetra+' and the name of the corresponding XML file.
 }
 \seealso{
-\code{\link{cruncher_and_param}}.
+\code{\link[=cruncher_and_param]{cruncher_and_param()}}.
 }

@@ -32,7 +32,7 @@ delete existing folders when renaming them. By default (\code{delete_existing_fi
 \item{cruncher_bin_directory}{Path to the "bin" directory of the 'JWSACruncher'. By default
 the value of the option \code{"cruncher_bin_directory"} is used.}
 
-\item{...}{Other parameters of \link{create_param_file}.}
+\item{...}{Other parameters of \code{\link[=create_param_file]{create_param_file()}}.}
 }
 \value{
 Path to the workspace.
@@ -41,5 +41,5 @@ Path to the workspace.
 Function to run the 'JWSACruncher' on a workspace while creating the parameter file.
 }
 \seealso{
-\code{\link{cruncher}}, \code{\link{update_workspace}}, \code{\link{create_param_file}}, \code{\link{multiprocessing_names}}.
+\code{\link[=cruncher]{cruncher()}}, \code{\link[=update_workspace]{update_workspace()}}, \code{\link[=create_param_file]{create_param_file()}}, \code{\link[=multiprocessing_names]{multiprocessing_names()}}.
 }

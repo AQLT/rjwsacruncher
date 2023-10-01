@@ -71,6 +71,18 @@ When the 'JWSACruncher' is launched, the data is refreshed with a specific polic
 \item \code{policy = "complete"} or \code{policy = "concurrent"}: the model is completely re-identified and re-estimated.
 }
 }
+\examples{
+\dontrun{
+dir = tempdir()
+# Here a file parameters.param is created in the directory dir
+# with default parameters of the different options
+create_param_file(dir)
+# to only export the raw and the seasonally adjusted series
+ create_param_file(dir, 
+                   tsmatrix_series = c("y", "sa"))
+}
+
+}
 \seealso{
-\code{\link{cruncher_and_param}}.
+\code{\link[=read_param_file]{read_param_file()}}, \code{\link[=list2param_file]{list2param_file()}}, \link{default_param_file} \code{\link[=cruncher_and_param]{cruncher_and_param()}}.
 }

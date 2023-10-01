@@ -9,7 +9,20 @@
 #' @param log_file Name of the log file of 'JWSACruncher'. By default the log isn't exported.
 #' @encoding UTF-8
 #' @return The path to the workspace.
-#' @seealso \code{\link{cruncher_and_param}}, \code{\link{update_workspace}}.
+#' @seealso Around the 'JWSACruncher': [cruncher_and_param()], [update_workspace()].
+#' To create the parameter file: [create_param_file()] and [list2param_file()].
+#' @examples
+#' \dontrun{
+#' dir = tempdir()
+#' # First create a parameter file
+#' # here a file parameters.param is created in the directory dir
+#' # with default parameters of 'JWSACruncher' v2
+#' list2param_file(dir, default_param_file(v3 = FALSE))
+#' # If the option "cruncher_bin_directory" is correctly defined:
+#' cruncher("workspace.xml",
+#'           param_file_path = file.path(dir, "parameters.param"))
+#' }
+#' 
 #' @export
 cruncher <- function(workspace,
                      cruncher_bin_directory = getOption("cruncher_bin_directory"),
@@ -100,8 +113,8 @@ cruncher <- function(workspace,
 #' By default \code{rename_multi_documents = FALSE}: the names of the XML files of the multi-documents are used.
 #' @param delete_existing_file Only used if \code{rename_multi_documents = TRUE}. Boolean indicating whether to 
 #' delete existing folders when renaming them. By default (\code{delete_existing_file = FALSE}) they are not deleted.
-#' @param ... Other parameters of \link{create_param_file}.
-#' @seealso \code{\link{cruncher}}, \code{\link{update_workspace}}, \code{\link{create_param_file}}, \code{\link{multiprocessing_names}}.
+#' @param ... Other parameters of [create_param_file()].
+#' @seealso [cruncher()], [update_workspace()], [create_param_file()], [multiprocessing_names()].
 #' @encoding UTF-8
 #' @return Path to the workspace.
 #' @export
@@ -156,7 +169,7 @@ cruncher_and_param <- function(workspace = NULL,
 #' @encoding UTF-8
 #' @return A \code{data.frame} containing the name of the multiprocessings that appears on 'JDemetra+' (column \code{name}) and 
 #' the name of the associated XML files (column \code{file}).
-#' @seealso \code{\link{cruncher_and_param}}.
+#' @seealso [cruncher_and_param()].
 #' @export
 multiprocessing_names <- function(workspace){
   if (missing(workspace) || is.null(workspace)) {
@@ -196,7 +209,7 @@ multiprocessing_names <- function(workspace){
 #' @inheritParams create_param_file
 #' @encoding UTF-8
 #' @return Path to the workspace.
-#' @seealso \code{\link{cruncher}}, \code{\link{cruncher_and_param}}.
+#' @seealso [cruncher()], [cruncher_and_param()].
 #' @export
 update_workspace <- function(workspace = NULL,
                              policy = "parameters",

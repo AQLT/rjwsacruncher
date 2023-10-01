@@ -30,8 +30,19 @@
 #' }
 #' 
 #' @return Path to the parameter file.
-#' @seealso \code{\link{cruncher_and_param}}.
+#' @seealso [read_param_file()], [list2param_file()], [default_param_file] [cruncher_and_param()].
 #' @encoding UTF-8
+#' @examples
+#' \dontrun{
+#' dir = tempdir()
+#' # Here a file parameters.param is created in the directory dir
+#' # with default parameters of the different options
+#' create_param_file(dir)
+#' # to only export the raw and the seasonally adjusted series
+#'  create_param_file(dir, 
+#'                    tsmatrix_series = c("y", "sa"))
+#' }
+#' 
 #' @export
 create_param_file <- function(
     dir_file_param, bundle = 10000, csv_layout = "list", csv_separator = ";",
@@ -92,9 +103,17 @@ create_param_file <- function(
   return(invisible(paste0(dir_file_param,"/parameters.param")))
 }
 
-#' Create parameter file for the 'JWSACruncher'
+#' Read parameter file of the 'JWSACruncher'
 #' 
 #' @param file Path to the parameter file.
+#' 
+#' @seealso [create_param_file()], [list2param_file()], [default_param_file()] [cruncher_and_param()].
+#' @examples
+#' dir = tempdir()
+#' list_param <- default_param_file(v3 = FALSE)
+#' list2param_file(dir, list_param)
+#' list_param_2 <- read_param_file(file.path(dir, "parameters.param"))
+#' all.equal(list_param, list_param_2)
 #' @export
 read_param_file <- function(file){
   f <- readLines(file)
@@ -127,7 +146,7 @@ read_param_file <- function(file){
   refreshall <- grep("refreshall", f, value = TRUE)
   if (length(refreshall) > 0) {
     refreshall <- gsub("(.*<refreshall>)|(</.*)", "", refreshall)
-    refreshall <- refreshall == '"true"'
+    refreshall <- refreshall == 'true'
   } else {
     refreshall <- NULL
   }
@@ -175,8 +194,20 @@ read_param_file <- function(file){
 #' Create parameter file from list
 #' 
 #' @inheritParams create_param_file
-#' @param x A list, for example create by \code{\link{read_param_file}} or \code{\link{default_param_file}}.
-#'@export
+#' @param x A list, for example create by [read_param_file()] or [default_param_file()].
+#' @seealso [create_param_file()], [read_param_file()], [default_param_file()] [cruncher_and_param()].
+#' @examples
+#' \dontrun{
+#' dir = tempdir()
+#' # Here a file parameters.param is created in the directory dir
+#' # with default parameters of 'JWSACruncher' v2
+#' list_param <- default_param_file(v3 = FALSE)
+#' list2param_file(dir, list_param)
+#' # to only export the raw and the seasonally adjusted series
+#' list_param$tsmatrix_series <- c("y", "sa")
+#' list2param_file(dir, list_param)
+#' }
+#' @export
 list2param_file <- function(dir_file_param, x){
   config <- x$config
   v3 <- !is.null(config$format)
@@ -190,6 +221,7 @@ list2param_file <- function(dir_file_param, x){
 #' 
 #' @param v3 Boolean indicating if the parameters are the from a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default 
 #' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
+#' @seealso [create_param_file()], [read_param_file()], [list2param_file()], [cruncher_and_param()].
 #' @export
 default_param_file <- function(v3 = getOption("is_cruncher_v3")){
   v3_param <- 

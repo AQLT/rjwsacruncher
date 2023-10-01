@@ -29,5 +29,5 @@ Path to the workspace.
 Function to update a workspace without exporting the results.
 }
 \seealso{
-\code{\link{cruncher}}, \code{\link{cruncher_and_param}}.
+\code{\link[=cruncher]{cruncher()}}, \code{\link[=cruncher_and_param]{cruncher_and_param()}}.
 }

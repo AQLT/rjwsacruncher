@@ -34,5 +34,5 @@ version of 'Java' is installed under \code{D:/Software/Java}, the path to \code{
 The function \code{configure_jwsacruncher()} does the steps 2 and 3.
 }
 \seealso{
-\code{\link{download_cruncher}}.
+\code{\link[=download_cruncher]{download_cruncher()}}.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/param_file.R
 \name{read_param_file}
 \alias{read_param_file}
-\title{Create parameter file for the 'JWSACruncher'}
+\title{Read parameter file of the 'JWSACruncher'}
 \usage{
 read_param_file(file)
 }
@@ -10,5 +10,15 @@ read_param_file(file)
 \item{file}{Path to the parameter file.}
 }
 \description{
-Create parameter file for the 'JWSACruncher'
+Read parameter file of the 'JWSACruncher'
+}
+\examples{
+dir = tempdir()
+list_param <- default_param_file(v3 = FALSE)
+list2param_file(dir, list_param)
+list_param_2 <- read_param_file(file.path(dir, "parameters.param"))
+all.equal(list_param, list_param_2)
+}
+\seealso{
+\code{\link[=create_param_file]{create_param_file()}}, \code{\link[=list2param_file]{list2param_file()}}, \code{\link[=default_param_file]{default_param_file()}} \code{\link[=cruncher_and_param]{cruncher_and_param()}}.
 }

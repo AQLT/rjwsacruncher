@@ -22,7 +22,7 @@
 #' # To download the release of the version 2.2.2:
 #' download_cruncher(dir, "2.2.2")
 #' }
-#' @seealso \code{\link{configure_jwsacruncher}}.
+#' @seealso [configure_jwsacruncher()].
 #' @export
 download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cruncher_v3")){
   if (missing(directory)) {
@@ -109,7 +109,7 @@ download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cr
 #' }
 #' The function \code{configure_jwsacruncher()} does the steps 2 and 3.
 #' 
-#' @seealso \code{\link{download_cruncher}}.
+#' @seealso [download_cruncher()].
 #' @encoding UTF-8
 #' @export
 configure_jwsacruncher <- function(jwsacruncher_path, java_path){

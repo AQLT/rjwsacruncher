@@ -42,5 +42,5 @@ download_cruncher(dir, "2.2.2")
 }
 }
 \seealso{
-\code{\link{configure_jwsacruncher}}.
+\code{\link[=configure_jwsacruncher]{configure_jwsacruncher()}}.
 }
