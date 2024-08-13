@@ -4,13 +4,13 @@
 # rjwsacruncher
 
 [![R-CMD-check](https://github.com/AQLT/rjwsacruncher/workflows/R-CMD-check/badge.svg)](https://github.com/AQLT/rjwsacruncher/actions)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)
 [![CRAN last
-release](http://www.r-pkg.org/badges/last-release/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)
+release](https://www.r-pkg.org/badges/last-release/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)
 [![CRAN monthly
-downloads](http://cranlogs.r-pkg.org/badges/rjwsacruncher?color=lightgrey)](https://cran.r-project.org/package=rjwsacruncher)
+downloads](https://cranlogs.r-pkg.org/badges/rjwsacruncher?color=lightgrey)](https://cran.r-project.org/package=rjwsacruncher)
 [![CRAN
-downloads](http://cranlogs.r-pkg.org/badges/grand-total/rjwsacruncher?color=lightgrey)](https://cran.r-project.org/package=rjwsacruncher)
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/rjwsacruncher?color=lightgrey)](https://cran.r-project.org/package=rjwsacruncher)
 
 The goal of rjwsacruncher is to launch quickly and easily the
 [JWSACruncher](https://github.com/jdemetra/jwsacruncher) of
@@ -59,16 +59,22 @@ under `D:/jdemetra-cli-2.2.3/`:
 options(cruncher_bin_directory = "D:/jdemetra-cli-2.2.3/bin/")
 ```
 
-The export items can be changed with the function
-“default\_matrix\_item” and “default\_tsmatrix\_series”:
+The export items can be changed with the function “default_matrix_item”
+and “default_tsmatrix_series”:
 
 ``` r
 # To get the default values:
 head(getOption("default_matrix_item"))
 #> [1] "period"       "span.start"   "span.end"     "span.n"       "span.missing"
 #> [6] "espan.start"
+```
+
+``` r
 getOption("default_tsmatrix_series")
 #> [1] "y"    "t"    "sa"   "s"    "i"    "ycal"
+```
+
+``` r
 # To only export the seasonally adjusted series and its forecasts:
 options(default_tsmatrix_series = c("sa", "sa_f"))
 ```
