@@ -20,13 +20,14 @@
 #' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
 #' @details When the 'JWSACruncher' is launched, the data is refreshed with a specific policy that is defined by the parameter \code{policy}. The available options are:
 #' \itemize{
-#' \item \code{policy = "current"}: all the estimations are fixed;
-#' \item \code{policy = "fixedparameters"} or \code{policy = "fixed"}: re-estimation of the coefficients of the regression variables (but not the ARIMA coefficients);
-#' \item \code{policy = "parameters"} (the default): \code{policy = "fixedparameters"} + re-estimation of ARIMA coefficients;
-#' \item \code{policy = "lastoutliers"}: \code{policy = "parameters"} + re-identification of last outliers (on the last year);
-#' \item \code{policy = "outliers"}: \code{policy = "lastoutliers"} + re-identification of all outliers;
-#' \item \code{policy = "stochastic"}: \code{policy = "outliers"} + re-identification of ARIMA orders;
-#' \item \code{policy = "complete"} or \code{policy = "concurrent"}: the model is completely re-identified and re-estimated.
+#' \item \code{policy = "current"}: all the estimations are fixed and AO added for new data (since v.2.2.3), short name `policy = "n"`;
+#' \item \code{policy = "fixed"}: all the estimations are fixed (since v.2.2.3), short name `policy = "f"`;
+#' \item \code{policy = "fixedparameters"}: re-estimation of the coefficients of the regression variables (but not the ARIMA coefficients), short name `policy = "fp"`;
+#' \item \code{policy = "parameters"} (the default): \code{policy = "fixedparameters"} + re-estimation of ARIMA coefficients, short name `policy = "p"`;
+#' \item \code{policy = "lastoutliers"}: \code{policy = "parameters"} + re-identification of last outliers (on the last year), short name `policy = "l"`;
+#' \item \code{policy = "outliers"}: \code{policy = "lastoutliers"} + re-identification of all outliers, short name `policy = "o"`;
+#' \item \code{policy = "stochastic"}: \code{policy = "outliers"} + re-identification of ARIMA orders, short name `policy = "s"`;
+#' \item \code{policy = "complete"} or \code{policy = "concurrent"}: the model is completely re-identified and re-estimated, short name `policy = "c"`.
 #' }
 #' 
 #' @return Path to the parameter file.
