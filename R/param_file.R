@@ -221,9 +221,11 @@ list2param_file <- function(dir_file_param, x){
 #' 
 #' @param v3 Boolean indicating if the parameters are the from a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default 
 #' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
+#' @param cruncher_bin_directory Path to the directory that contains the 'JWSACruncher' binary.
+#' If defined, the parameter `v3` is ignored and the 'JWSACruncher' is run without  parameter to generate the default parameters file.
 #' @seealso [create_param_file()], [read_param_file()], [list2param_file()], [cruncher_and_param()].
 #' @export
-default_param_file <- function(v3 = getOption("is_cruncher_v3")){
+default_param_file <- function(v3 = getOption("is_cruncher_v3"), cruncher_bin_directory = NULL){
   v3_param <- 
     list(
       config = list(bundle = "10000", csv_layout = "list", csv_separator = ";", 
@@ -477,9 +479,30 @@ default_param_file <- function(v3 = getOption("is_cruncher_v3")){
                           "decomposition.i_cmp_ef", "decomposition.t_cmp_ef", "decomposition.s_cmp_ef", 
                           "decomposition.sa_cmp_ef", "decomposition.si_cmp"), 
       paths_path = NULL)
-  if (v3) {
-    v3_param
-  } else {
-    v2_param
+  if(! is.null(cruncher_bin_directory)) {
+    if (!file.exists(file.path(cruncher_bin_directory,"jwsacruncher")))
+      stop (sprintf("JWSACruncher not found in %s.\n Check the installation", paste0(cruncher_bin_directory,"/jwsacruncher"))) 
+    wd <- getwd()
+    setwd(cruncher_bin_directory)
+    on.exit(setwd(wd))
+    os <- Sys.info()[['sysname']]
+    if (os == "Windows") {
+      log <- system(
+        "jwsacruncher", intern = TRUE)
+    } else {
+      # Mac OS and linux
+      log <- system(
+        "./jwsacruncher", 
+        intern = TRUE)
+    }
+    res <- rjwsacruncher::read_param_file(file.path(cruncher_bin_directory, "wsacruncher.params"))
+    file.remove(file.path(cruncher_bin_directory, "wsacruncher.params"))
   }
+  
+  if (v3) {
+    res <- v3_param
+  } else {
+    res <- v2_param
+  }
+  return(res)
 }
