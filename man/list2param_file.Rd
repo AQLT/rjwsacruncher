@@ -4,12 +4,19 @@
 \alias{list2param_file}
 \title{Create parameter file from list}
 \usage{
-list2param_file(dir_file_param, x)
+list2param_file(
+  dir_file_param,
+  x,
+  file_param = file.path(dir_file_param, "parameters.param")
+)
 }
 \arguments{
-\item{dir_file_param}{Path to the directory that will contains the parameter file \code{"parameters.param"}.}
+\item{dir_file_param}{Path to the directory that will contains the parameter file \code{"parameters.param"} (if \code{file_param} not supplied).}
 
 \item{x}{A list, for example create by \code{\link[=read_param_file]{read_param_file()}} or \code{\link[=default_param_file]{default_param_file()}}.}
+
+\item{file_param}{Path to the parameters file.
+By default the file is named \code{parameters.param} and it is created at the \code{fir_file_param} directory.}
 }
 \description{
 Create parameter file from list

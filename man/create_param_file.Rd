@@ -19,11 +19,12 @@ create_param_file(
   matrix_item = getOption("default_matrix_item"),
   tsmatrix_series = getOption("default_tsmatrix_series"),
   paths_path = NULL,
-  v3 = getOption("is_cruncher_v3")
+  v3 = getOption("is_cruncher_v3"),
+  file_param = file.path(dir_file_param, "parameters.param")
 )
 }
 \arguments{
-\item{dir_file_param}{Path to the directory that will contains the parameter file \code{"parameters.param"}.}
+\item{dir_file_param}{Path to the directory that will contains the parameter file \code{"parameters.param"} (if \code{file_param} not supplied).}
 
 \item{bundle}{Maximum size for a group of series (in output). By default \code{bundle = 10000}.}
 
@@ -52,6 +53,9 @@ Only used when \code{v3 = TRUE}.}
 
 \item{v3}{Boolean indicating if the parameter file should be compatible with a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default
 the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).}
+
+\item{file_param}{Path to the parameters file.
+By default the file is named \code{parameters.param} and it is created at the \code{fir_file_param} directory.}
 }
 \value{
 Path to the parameter file.
