@@ -4,11 +4,17 @@
 \alias{default_param_file}
 \title{Get default parameters of the 'JWSACruncher'}
 \usage{
-default_param_file(v3 = getOption("is_cruncher_v3"))
+default_param_file(
+  v3 = getOption("is_cruncher_v3"),
+  cruncher_bin_directory = NULL
+)
 }
 \arguments{
 \item{v3}{Boolean indicating if the parameters are the from a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default
 the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).}
+
+\item{cruncher_bin_directory}{Path to the directory that contains the 'JWSACruncher' binary.
+If defined, the parameter \code{v3} is ignored and the 'JWSACruncher' is run without  parameter to generate the default parameters file.}
 }
 \description{
 Get default parameters of the 'JWSACruncher'

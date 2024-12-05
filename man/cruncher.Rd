@@ -9,7 +9,9 @@ cruncher(
   workspace,
   cruncher_bin_directory = getOption("cruncher_bin_directory"),
   param_file_path,
-  log_file = NULL
+  log_file = NULL,
+  rename_multi_documents = FALSE,
+  delete_existing_file = FALSE
 )
 }
 \arguments{
@@ -21,6 +23,13 @@ the value of the option \code{"cruncher_bin_directory"} is used.}
 \item{param_file_path}{Path to the parameter file of the 'JWSACruncher'. By default a .params file is search in the save directory of the workspace.}
 
 \item{log_file}{Name of the log file of 'JWSACruncher'. By default the log isn't exported.}
+
+\item{rename_multi_documents}{Boolean indicating whether to rename the folders
+containing the outputs according to the names of the multi-documents of the workspace.
+By default \code{rename_multi_documents = FALSE}: the names of the XML files of the multi-documents are used.}
+
+\item{delete_existing_file}{Only used if \code{rename_multi_documents = TRUE}. Boolean indicating whether to
+delete existing folders when renaming them. By default (\code{delete_existing_file = FALSE}) they are not deleted.}
 }
 \value{
 The path to the workspace.

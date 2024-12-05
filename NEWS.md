@@ -1,3 +1,9 @@
+# rjwsacruncher 0.2.1
+
+- parameters `rename_multi_documents` and `renaming_existing_files` added in `cruncher()` function.
+
+- parameter `cruncher_bin_directory` in `default_parameter_file()` to get the default parameter from a local installation of the JWSACruncher
+
 # rjwsacruncher 0.2.0
 
 - correction in export of the log file when relative path are given.
