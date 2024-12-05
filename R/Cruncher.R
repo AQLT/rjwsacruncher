@@ -7,6 +7,11 @@
 #' the value of the option \code{"cruncher_bin_directory"} is used.
 #' @param param_file_path Path to the parameter file of the 'JWSACruncher'. By default a .params file is search in the save directory of the workspace.
 #' @param log_file Name of the log file of 'JWSACruncher'. By default the log isn't exported.
+#' @param rename_multi_documents Boolean indicating whether to rename the folders 
+#' containing the outputs according to the names of the multi-documents of the workspace. 
+#' By default \code{rename_multi_documents = FALSE}: the names of the XML files of the multi-documents are used.
+#' @param delete_existing_file Only used if \code{rename_multi_documents = TRUE}. Boolean indicating whether to 
+#' delete existing folders when renaming them. By default (\code{delete_existing_file = FALSE}) they are not deleted.
 #' @encoding UTF-8
 #' @return The path to the workspace.
 #' @seealso Around the 'JWSACruncher': [cruncher_and_param()], [update_workspace()].
@@ -26,7 +31,9 @@
 #' @export
 cruncher <- function(workspace,
                      cruncher_bin_directory = getOption("cruncher_bin_directory"),
-                     param_file_path, log_file = NULL){
+                     param_file_path, log_file = NULL,
+                     rename_multi_documents = FALSE,
+                     delete_existing_file = FALSE){
   if (is.null(cruncher_bin_directory))
     stop("You must specify the path to the cruncher")
   
@@ -99,6 +106,32 @@ cruncher <- function(workspace,
   if (!missing(log_file) && !is.null(log_file))
     writeLines(text = log, con = log_file)
   
+  if (rename_multi_documents) {
+    output <- read_param_file(param_file_path)$output
+    if (is.null(output))
+      output <- paste0(sub("\\.xml","",workspace),"\\Output")
+    
+    noms_multi_documents <- multiprocessing_names(workspace)
+    if (nrow(noms_multi_documents) == 0)
+      stop("No multi-document in the workspace")
+    noms_multi_documents$name <- file.path(output,noms_multi_documents$name)
+    noms_multi_documents$file <- file.path(output, noms_multi_documents$file)
+    noms_multi_documents <- noms_multi_documents[noms_multi_documents$name != noms_multi_documents$file,]
+    
+    if (any(file.exists(noms_multi_documents$name))) {
+      if (delete_existing_file) {
+        unlink(noms_multi_documents$name[file.exists(noms_multi_documents$name)],
+               recursive = TRUE)
+        file.rename(from = noms_multi_documents$file, to = noms_multi_documents$name)
+      }else{
+        warning("Some folders already exist: none are renamed")
+      }
+    }else{
+      file.rename(from = noms_multi_documents$file, to = noms_multi_documents$name)
+    }
+    
+  }
+  
   return(invisible(workspace))
 }
 
@@ -108,11 +141,6 @@ cruncher <- function(workspace,
 #'
 #' @inheritParams cruncher
 #' @inheritParams create_param_file
-#' @param rename_multi_documents Boolean indicating whether to rename the folders 
-#' containing the outputs according to the names of the multi-documents of the workspace. 
-#' By default \code{rename_multi_documents = FALSE}: the names of the XML files of the multi-documents are used.
-#' @param delete_existing_file Only used if \code{rename_multi_documents = TRUE}. Boolean indicating whether to 
-#' delete existing folders when renaming them. By default (\code{delete_existing_file = FALSE}) they are not deleted.
 #' @param ... Other parameters of [create_param_file()].
 #' @seealso [cruncher()], [update_workspace()], [create_param_file()], [multiprocessing_names()].
 #' @encoding UTF-8
@@ -129,34 +157,9 @@ cruncher_and_param <- function(workspace = NULL,
   dossier_temp <- tempdir()
   fichier_param <- create_param_file(dossier_temp, output = output, ...)
   workspace <- cruncher(workspace = workspace, cruncher_bin_directory = cruncher_bin_directory,
-                        param_file_path = fichier_param, log_file = log_file)
-  
-  if (rename_multi_documents) {
-    if (is.null(output))
-      output <- paste0(sub("\\.xml","",workspace),"\\Output")
-    
-    noms_multi_documents <- multiprocessing_names(workspace)
-    if (nrow(noms_multi_documents) == 0)
-      stop("No multi-document in the workspace")
-    noms_multi_documents$name <- file.path(output,noms_multi_documents$name)
-    noms_multi_documents$file <- file.path(output, noms_multi_documents$file)
-    noms_multi_documents <- noms_multi_documents[noms_multi_documents$name != noms_multi_documents$file,]
-    
-    if (any(file.exists(noms_multi_documents$name))) {
-      
-      if (delete_existing_file) {
-        unlink(noms_multi_documents$name[file.exists(noms_multi_documents$name)],
-               recursive = TRUE)
-        file.rename(from = noms_multi_documents$file, to = noms_multi_documents$name)
-      }else{
-        warning("Some folders already exist: none are renamed")
-      }
-      
-    }else{
-      file.rename(from = noms_multi_documents$file, to = noms_multi_documents$name)
-    }
-    
-  }
+                        param_file_path = fichier_param, log_file = log_file,
+                        rename_multi_documents = rename_multi_documents,
+                        delete_existing_file = delete_existing_file)
   
   return(invisible(workspace))
 }
