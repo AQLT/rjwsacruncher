@@ -2,7 +2,9 @@
 #'
 #' To run the 'JWSACruncher' needs a parameter file and \code{create_param_file} allows to create it.
 #'
-#' @param dir_file_param Path to the directory that will contains the parameter file \code{"parameters.param"}.
+#' @param dir_file_param Path to the directory that will contains the parameter file \code{"parameters.param"} (if `file_param` not supplied).
+#' @param file_param Path to the parameters file. 
+#' By default the file is named `parameters.param` and it is created at the `fir_file_param` directory.
 #' @param bundle Maximum size for a group of series (in output). By default \code{bundle = 10000}.
 #' @param csv_layout Layout of the CSV files (series only). By default \code{csv_layout = "list"}. Other options: \code{csv_layout = "vtable"} (vertical table) or \code{csv_layout = "htable"} (horizontal table).
 #' @param csv_separator The field separator string used in the CSV file. By default \code{csv_separator = ";"}.
@@ -52,8 +54,10 @@ create_param_file <- function(
     matrix_item = getOption("default_matrix_item"),
     tsmatrix_series = getOption("default_tsmatrix_series"),
     paths_path = NULL,
-    v3 = getOption("is_cruncher_v3")){
-  if (missing(dir_file_param))
+    v3 = getOption("is_cruncher_v3"),
+    file_param = file.path(dir_file_param, "parameters.param")
+    ){
+  if (missing(dir_file_param) & missing(file_param))
     stop("The parameter dir_file_param is missing")
   
   first_line <- "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
@@ -96,12 +100,12 @@ create_param_file <- function(
                     "    </paths>")
   }
   
-  file_param <- c(first_line, param_line, policy_line, refresh_line, output_line,
+  export_file <- c(first_line, param_line, policy_line, refresh_line, output_line,
                   matrix_lines, tsmatrix_lines, path_lines,
                   "</wsaConfig>"
   )
-  writeLines(file_param, con = paste0(dir_file_param,"/parameters.param"))
-  return(invisible(paste0(dir_file_param,"/parameters.param")))
+  writeLines(export_file, con = file_param)
+  return(invisible(file_param))
 }
 
 #' Read parameter file of the 'JWSACruncher'
@@ -209,12 +213,19 @@ read_param_file <- function(file){
 #' list2param_file(dir, list_param)
 #' }
 #' @export
-list2param_file <- function(dir_file_param, x){
+list2param_file <- function(dir_file_param, x,
+                            file_param = file.path(dir_file_param, "parameters.param")){
   config <- x$config
   v3 <- !is.null(config$format)
   config$format <- x$config <- NULL
-  params <- c(list(dir_file_param = dir_file_param, v3 = v3),
-              config, x)
+  if (!missing(file_param)) {
+    params <- c(list(file_param = file_param, v3 = v3),
+                config, x)
+  } else {
+    params <- c(list(dir_file_param = dir_file_param, v3 = v3),
+                config, x)
+  }
+  
   do.call(create_param_file, params)
 }
 
