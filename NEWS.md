@@ -6,6 +6,8 @@
 
 - parameter `file_param` added in `create_param_file()` and `list2param_file()` to be able to change the name of the parameter file.
 
+- documentation update to add new policies.
+
 # rjwsacruncher 0.2.0
 
 - correction in export of the log file when relative path are given.

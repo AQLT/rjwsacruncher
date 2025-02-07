@@ -25,6 +25,7 @@
 #' \item \code{policy = "current"}: all the estimations are fixed and AO added for new data (since v.2.2.3), short name `policy = "n"`;
 #' \item \code{policy = "fixed"}: all the estimations are fixed (since v.2.2.3), short name `policy = "f"`;
 #' \item \code{policy = "fixedparameters"}: re-estimation of the coefficients of the regression variables (but not the ARIMA coefficients), short name `policy = "fp"`;
+#' \item \code{policy = "fixedarparameters"}: re-estimation of the coefficients of the regression variables and of the MA coefficients of the ARIMA model (but not the AR coefficients), short name `policy = "farp"` (since v.3.3.1);
 #' \item \code{policy = "parameters"} (the default): \code{policy = "fixedparameters"} + re-estimation of ARIMA coefficients, short name `policy = "p"`;
 #' \item \code{policy = "lastoutliers"}: \code{policy = "parameters"} + re-identification of last outliers (on the last year), short name `policy = "l"`;
 #' \item \code{policy = "outliers"}: \code{policy = "lastoutliers"} + re-identification of all outliers, short name `policy = "o"`;

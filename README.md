@@ -26,14 +26,17 @@ JWSACruncher can be found on
 # Install release version from CRAN
 install.packages("rjwsacruncher")
 
-# Install development version from GitHub
+# Install development version:
+install.packages("rjwsacruncher", repos = c("https://aqlt.r-universe.dev", "https://cloud.r-project.org"))
+# Or :
 # install.packages("devtools")
-devtools::install_github("AQLT/rjwsacruncher")
+# devtools::install_github("AQLT/rjwsacruncher")
 ```
 
 The JWSACruncher is not included in the package. It can be downloaded
-from GitHub (<https://github.com/jdemetra/jwsacruncher/releases>) or
-with the function `download_cruncher()`:
+from GitHub (<https://github.com/jdemetra/jwsacruncher/releases> or
+<https://github.com/jdemetra/jdplus-main/releases>) or with the function
+`download_cruncher()`:
 
 ``` r
 library(rjwsacruncher)
@@ -67,14 +70,8 @@ and “default_tsmatrix_series”:
 head(getOption("default_matrix_item"))
 #> [1] "period"       "span.start"   "span.end"     "span.n"       "span.missing"
 #> [6] "espan.start"
-```
-
-``` r
 getOption("default_tsmatrix_series")
 #> [1] "y"    "t"    "sa"   "s"    "i"    "ycal"
-```
-
-``` r
 # To only export the seasonally adjusted series and its forecasts:
 options(default_tsmatrix_series = c("sa", "sa_f"))
 ```
