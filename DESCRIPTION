@@ -1,6 +1,6 @@
 Package: rjwsacruncher
 Title: Interface to the 'JWSACruncher' of 'JDemetra+'
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: c(person("Alain", "Quartier-la-Tente", role = c("aut", "cre"),
                  email = "alain.quartier@yahoo.fr",
                  comment = c(ORCID = "0000-0001-7890-3857")),
@@ -8,7 +8,7 @@ Authors@R: c(person("Alain", "Quartier-la-Tente", role = c("aut", "cre"),
          role = "cph"))
 Description: 'JDemetra+' (<https://github.com/jdemetra/jdemetra-app>) is the seasonal adjustment software officially recommended
   to the members of the European Statistical System and the European System of Central Banks. Seasonal adjustment models performed
-  with 'JDemetra+' can be stored into workspaces. 'JWSACruncher' (<https://github.com/jdemetra/jwsacruncher/releases>) is a console tool that 
+  with 'JDemetra+' can be stored into workspaces. 'JWSACruncher' (<https://github.com/jdemetra/jwsacruncher/releases> for v2 and <https://github.com/jdemetra/jdplus-main/releases> for v3) is a console tool that 
   re-estimates all the multi-processing defined in a workspace and to export the result. 'rjwsacruncher' allows to launch easily the 'JWSACruncher'.
 URL: https://github.com/AQLT/rjwsacruncher
 BugReports: https://github.com/AQLT/rjwsacruncher/issues
