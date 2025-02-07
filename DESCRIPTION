@@ -10,7 +10,7 @@ Description: 'JDemetra+' (<https://github.com/jdemetra/jdemetra-app>) is the sea
   to the members of the European Statistical System and the European System of Central Banks. Seasonal adjustment models performed
   with 'JDemetra+' can be stored into workspaces. 'JWSACruncher' (<https://github.com/jdemetra/jwsacruncher/releases> for v2 and <https://github.com/jdemetra/jdplus-main/releases> for v3) is a console tool that 
   re-estimates all the multi-processing defined in a workspace and to export the result. 'rjwsacruncher' allows to launch easily the 'JWSACruncher'.
-URL: https://github.com/AQLT/rjwsacruncher, https://aqlt.github.io/rjwsacruncher/
+URL: https://aqlt.github.io/rjwsacruncher, https://github.com/AQLT/rjwsacruncher
 BugReports: https://github.com/AQLT/rjwsacruncher/issues
 Imports:
     XML
