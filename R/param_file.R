@@ -144,10 +144,10 @@ read_param_file <- function(file){
   list_config <- gsub("rsltnamelevel", "rslt_name_level", list_config)
   names(config) <- list_config
   if (!is.null(config$full_series_name)) {
-    config$full_series_name <- config$full_series_name == '"true"'
+    config$full_series_name <- config$full_series_name == 'true'
   }
   if (!is.null(config$short_column_headers)) {
-    config$short_column_headers <- config$short_column_headers == '"true"'
+    config$short_column_headers <- config$short_column_headers == 'true'
   }
   policy <- grep("policy", f, value = TRUE)
   if (length(policy) > 0) {
