@@ -11,6 +11,8 @@
 #' @param ndecs Number of decimals used in the output. By default \code{ndec = 6}.
 #' @param full_series_name Boolean indicating if the fully qualified name of the series will be used (the default \code{full_series_name = TRUE}) or if only the name of the series  should be displayed.
 #' Only used when \code{v3 = TRUE}.
+#' @param short_column_headers Boolean indicating if the full column names should be printed (the default `short_column_headers = TRUE`) instead of always outputting shortened ones.
+#' Only used when \code{v3 = TRUE} (since v.3.4.0).
 #' @param rslt_name_level Only used when \code{v3 = TRUE}.
 #' @param policy Refreshing policy of the processing. By default \code{policy = "parameters"} (re-estimation of the coefficients of the reg-ARIMA model, see details).
 #' @param refreshall Boolean indicating if the data is refreshed (by default `refreshall = TRUE`).
@@ -25,7 +27,7 @@
 #' \item \code{policy = "current"}: all the estimations are fixed and AO added for new data (since v.2.2.3), short name `policy = "n"`;
 #' \item \code{policy = "fixed"}: all the estimations are fixed (since v.2.2.3), short name `policy = "f"`;
 #' \item \code{policy = "fixedparameters"}: re-estimation of the coefficients of the regression variables (but not the ARIMA coefficients), short name `policy = "fp"`;
-#' \item \code{policy = "fixedarparameters"}: re-estimation of the coefficients of the regression variables and of the MA coefficients of the ARIMA model (but not the AR coefficients), short name `policy = "farp"` (since v.3.3.1);
+#' \item \code{policy = "fixedarparameters"}: re-estimation of the coefficients of the regression variables and of the MA coefficients of the ARIMA model (but not the AR coefficients), short name `policy = "farp"` (since v.3.4.0);
 #' \item \code{policy = "parameters"} (the default): \code{policy = "fixedparameters"} + re-estimation of ARIMA coefficients, short name `policy = "p"`;
 #' \item \code{policy = "lastoutliers"}: \code{policy = "parameters"} + re-identification of last outliers (on the last year), short name `policy = "l"`;
 #' \item \code{policy = "outliers"}: \code{policy = "lastoutliers"} + re-identification of all outliers, short name `policy = "o"`;
@@ -50,7 +52,7 @@
 #' @export
 create_param_file <- function(
     dir_file_param, bundle = 10000, csv_layout = "list", csv_separator = ";",
-    ndecs = 6, full_series_name = TRUE, rslt_name_level = 2, policy = "parameters", refreshall = TRUE, 
+    ndecs = 6, full_series_name = TRUE, short_column_headers = TRUE, rslt_name_level = 2, policy = "parameters", refreshall = TRUE, 
     output = NULL,
     matrix_item = getOption("default_matrix_item"),
     tsmatrix_series = getOption("default_tsmatrix_series"),
@@ -67,6 +69,7 @@ create_param_file <- function(
   if (v3){
     param_line <- paste(param_line,
                         " fullseriesname=", ifelse(full_series_name, "true", "false"),
+                        " shortcolumnheaders=", ifelse(short_column_headers, "true", "false"),
                         " rsltnamelevel=", rslt_name_level,
                         " format=", 
                         "JD3", sep = "\"")
@@ -137,10 +140,14 @@ read_param_file <- function(file){
   })
   list_config <- gsub("csv", "csv_", list_config)
   list_config <- gsub("fullseriesname", "full_series_name", list_config)
+  list_config <- gsub("shortcolumnheaders", "short_column_headers", list_config)
   list_config <- gsub("rsltnamelevel", "rslt_name_level", list_config)
   names(config) <- list_config
   if (!is.null(config$full_series_name)) {
-    config$full_series_name <- config$full_series_name == '"true"'
+    config$full_series_name <- config$full_series_name == 'true'
+  }
+  if (!is.null(config$short_column_headers)) {
+    config$short_column_headers <- config$short_column_headers == 'true'
   }
   policy <- grep("policy", f, value = TRUE)
   if (length(policy) > 0) {
@@ -242,7 +249,9 @@ default_param_file <- function(v3 = getOption("is_cruncher_v3"), cruncher_bin_di
   v3_param <- 
     list(
       config = list(bundle = "10000", csv_layout = "list", csv_separator = ";", 
-                    ndecs = "6", full_series_name = TRUE, rslt_name_level = "2", 
+                    ndecs = "6", full_series_name = TRUE, 
+                    short_column_headers = TRUE,
+                    rslt_name_level = "2", 
                     format = "JD3"),
       policy = "parameters", refreshall = TRUE, 
       output = NULL,
@@ -495,24 +504,27 @@ default_param_file <- function(v3 = getOption("is_cruncher_v3"), cruncher_bin_di
   if(! is.null(cruncher_bin_directory)) {
     if (!file.exists(file.path(cruncher_bin_directory,"jwsacruncher")))
       stop (sprintf("JWSACruncher not found in %s.\n Check the installation", paste0(cruncher_bin_directory,"/jwsacruncher"))) 
-    wd <- getwd()
-    setwd(cruncher_bin_directory)
-    on.exit(setwd(wd))
-    os <- Sys.info()[['sysname']]
-    if (os == "Windows") {
-      log <- system(
-        "jwsacruncher", intern = TRUE)
-    } else {
-      # Mac OS and linux
-      log <- system(
-        "./jwsacruncher", 
-        intern = TRUE)
+    param_file <- file.path(cruncher_bin_directory, "wsacruncher.params")
+    exists_param_file <- file.exists(param_file)
+    if (!exists_param_file) {
+      wd <- getwd()
+      setwd(cruncher_bin_directory)
+      on.exit(setwd(wd))
+      os <- Sys.info()[['sysname']]
+      if (os == "Windows") {
+        log <- system(
+          "jwsacruncher", intern = TRUE)
+      } else {
+        # Mac OS and linux
+        log <- system(
+          "./jwsacruncher", 
+          intern = TRUE)
+      }
     }
-    res <- rjwsacruncher::read_param_file(file.path(cruncher_bin_directory, "wsacruncher.params"))
-    file.remove(file.path(cruncher_bin_directory, "wsacruncher.params"))
-  }
-  
-  if (v3) {
+    res <- read_param_file(param_file)
+    if (!exists_param_file)
+      file.remove(param_file)
+  } else if (v3) {
     res <- v3_param
   } else {
     res <- v2_param

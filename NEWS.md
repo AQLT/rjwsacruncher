@@ -1,3 +1,13 @@
+# rjwsacruncher 0.2.2
+
+- add new parameter `short_column_headers` to `create_param_file()`.
+
+- correction of `default_param_file()` when `cruncher_bin_directory` is defined.
+
+- correction of `read_param_file()` which where converting `full_series_name` parameter to `FALSE`.
+
+- if the default parameter file of the 'JWSACruncher' already exists, `default_param_file()` do not erase and delete it when `cruncher_bin_directory` is defined.
+
 # rjwsacruncher 0.2.1
 
 - parameters `rename_multi_documents` and `renaming_existing_files` added in `cruncher()` function.
