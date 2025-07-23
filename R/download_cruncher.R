@@ -96,6 +96,81 @@ download_cruncher <- function(directory, cruncher_version = NULL, v3 = getOption
   return(invisible(TRUE))
 }
 
+download_jdemetra <- function(directory, cruncher_version = NULL, v3 = getOption("is_cruncher_v3"), standalone = FALSE){
+  if (missing(directory)) {
+    if (Sys.info()[['sysname']] == "Windows") {
+      directory <- utils::choose.dir(caption = "Choose to directory where to download the 'JWSACruncher'")
+      
+      if (is.na(directory)) {
+        stop("You must select or specify the directory where to export the 'JWSACruncher'")
+      }
+    }else{
+      stop("You must specify the directory where to export the 'JWSACruncher'")
+    }
+  }
+  
+  if (is.null(cruncher_version)) { 
+    if (v3) {
+      url_release <- "https://api.github.com/repos/jdemetra/jdplus-main/releases/latest"
+    } else {
+      url_release <- "https://api.github.com/repos/jdemetra/jdemetra-app/releases/latest"
+    }
+  }else{
+    v3 <- cruncher_version >= "3.0.0"
+    if (v3) {
+      url_release <- sprintf("https://api.github.com/repos/jdemetra/jdplus-main/releases/tags/v%s",
+                             cruncher_version)
+    } else {
+      url_release <- sprintf("https://api.github.com/repos/jdemetra/jdemetra-app/releases/tags/v%s",
+                             cruncher_version)
+    }
+  }
+  
+  tryCatch(release_url <- readLines(url_release,
+                                    warn = FALSE),
+           error = function(e){
+             stop("Error downloading the cruncher. Check the URL:", url)
+           })
+  release_url <- strsplit(release_url, ",")[[1]]
+  release_url <- grep("browser_download_url", release_url, value = TRUE)
+  release_url <- gsub("^.*browser_download_url\":\"", "", release_url)
+  release_url <- gsub("\".*", "", release_url)
+  release_url <- grep("\\.zip$", release_url, value = TRUE)
+  release_url <- release_url[grep("jdemetra", basename(release_url))]
+  if (v3) {
+    if (standalone) {
+      sysname <- tolower(Sys.info()["sysname"])
+      machine <- tolower(Sys.info()["machine"])
+      
+      if (sysname == "windows") {
+        os <- "windows-x86_64"
+      } else if (sysname == "darwin") {
+        if (machine == "x86_64") {
+          os <- "osx-x86_64"
+        } else {
+          os <- "osx-aarch_64"
+        } 
+      } else {
+        if (machine == "x86_64") {
+          os <- "linux-x86_64"
+        } else {
+          os <- "linux-aarch_64"
+        } 
+      }
+      release_url <- grep(os, release_url, value = TRUE)
+    } else {
+      release_url <- grep("standalone", release_url, value = TRUE, invert = TRUE)
+    }
+  } else {
+    release_url <- grep("windows", release_url, value = TRUE,
+                        invert = Sys.info()[['sysname']] != "Windows")
+  }
+  zip_name <- gsub(".*/", "", release_url)
+  utils::download.file(release_url, file.path(directory, zip_name))
+  return(invisible(TRUE))
+}
+
+
 # Autre possibilité
 # if (missing(cruncher_version)) {
 #   url_gh <- "GET /repos/jdemetra/jwsacruncher/releases/latest"
