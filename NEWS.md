@@ -1,3 +1,7 @@
+# rjwsacruncher 0.2.3
+
+- add new parameter `standalone` to `download_cruncher()`.
+
 # rjwsacruncher 0.2.2
 
 - add new parameter `short_column_headers` to `create_param_file()`.

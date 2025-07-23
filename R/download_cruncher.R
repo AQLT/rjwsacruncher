@@ -7,6 +7,7 @@
 #' @param cruncher_version Character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.
 #' @param v3 Boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default 
 #' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
+#' @param standalone Boolean indicating if the standalone version should be downloaded (only available when `v3 = TRUE`).
 #' @details The 'JWSACruncher' is downloaded from <https://github.com/jdemetra/jwsacruncher/releases> for versions lower than 3.0.0 and from <https://github.com/jdemetra/jdplus-main/releases> for the other versions.
 #'  To use it, it has to be unzip.
 #' @encoding UTF-8
@@ -24,7 +25,7 @@
 #' }
 #' @seealso [configure_jwsacruncher()].
 #' @export
-download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cruncher_v3")){
+download_cruncher <- function(directory, cruncher_version = NULL, v3 = getOption("is_cruncher_v3"), standalone = FALSE){
   if (missing(directory)) {
     if (Sys.info()[['sysname']] == "Windows") {
       directory <- utils::choose.dir(caption = "Choose to directory where to download the 'JWSACruncher'")
@@ -37,7 +38,7 @@ download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cr
     }
   }
   
-  if (missing(cruncher_version)) { 
+  if (is.null(cruncher_version)) { 
     if (v3) {
       url_release <- "https://api.github.com/repos/jdemetra/jdplus-main/releases/latest"
     } else {
@@ -66,8 +67,29 @@ download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cr
   release_url <- grep("\\.zip$", release_url, value = TRUE)
   release_url <- grep("jwsacruncher", release_url, value = TRUE)
   if (v3) {
-    release_url <- grep("windows", release_url, value = TRUE,
-                        invert = Sys.info()[['sysname']] != "Windows")
+    if (standalone) {
+      sysname <- tolower(Sys.info()["sysname"])
+      machine <- tolower(Sys.info()["machine"])
+      
+      if (sysname == "windows") {
+        os <- "windows-x86_64"
+      } else if (sysname == "darwin") {
+        if (machine == "x86_64") {
+          os <- "osx-x86_64"
+        } else {
+          os <- "osx-aarch_64"
+        } 
+      } else {
+        if (machine == "x86_64") {
+          os <- "linux-x86_64"
+        } else {
+          os <- "linux-aarch_64"
+        } 
+      }
+      release_url <- grep(os, release_url, value = TRUE)
+    } else {
+      release_url <- grep("standalone", release_url, value = TRUE, invert = TRUE)
+    }
   }
   zip_name <- gsub(".*/", "", release_url)
   utils::download.file(release_url, file.path(directory, zip_name))

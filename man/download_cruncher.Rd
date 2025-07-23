@@ -7,8 +7,9 @@
 \usage{
 download_cruncher(
   directory,
-  cruncher_version,
-  v3 = getOption("is_cruncher_v3")
+  cruncher_version = NULL,
+  v3 = getOption("is_cruncher_v3"),
+  standalone = FALSE
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ by default to select the directory.}
 
 \item{v3}{Boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default
 the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).}
+
+\item{standalone}{Boolean indicating if the standalone version should be downloaded (only available when \code{v3 = TRUE}).}
 }
 \description{
 Function to download the ZIP file of the 'JWSACruncher'
