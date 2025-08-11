@@ -56,7 +56,7 @@ Only used when \code{v3 = TRUE} (since v.3.4.0).}
 \item{paths_path}{The paths used for relative addresses (see the "Demetra Paths" of the graphical interface of 'JDemetra+').}
 
 \item{v3}{Boolean indicating if the parameter file should be compatible with a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default
-the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).}
+the value of the option \code{"is_cruncher_v3"} is used.}
 
 \item{file_param}{Path to the parameters file.
 By default the file is named \code{parameters.param} and it is created at the \code{fir_file_param} directory.}

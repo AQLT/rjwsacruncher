@@ -81,6 +81,14 @@
         options(cruncher_bin_directory = NULL)
   
   if(is.null(getOption("is_cruncher_v3")))
-    options(is_cruncher_v3 = FALSE)
-  
+    options(is_cruncher_v3 = TRUE)
+}
+
+.onAttach <- function(libname, pkgname) {
+  version <- ifelse(getOption("is_cruncher_v3"), "v3", "v2")
+  packageStartupMessage(
+    "By default, the version ", version, " is used. ",
+    "To change to version ", version, 
+    " use the option `options(is_cruncher_v3 = ", !getOption("is_cruncher_v3") ,"`)."
+    )
 }

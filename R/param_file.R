@@ -21,7 +21,7 @@
 #' @param tsmatrix_series Character containing the names of the times series to export (see the 'JDemetra+' manual for more information).  By default, the items defined in the option \code{getOption("default_tsmatrix_series")} are used (option initialized by the default output of the 'JWSACruncher' 2.2.2).
 #' @param paths_path The paths used for relative addresses (see the "Demetra Paths" of the graphical interface of 'JDemetra+').
 #' @param v3 Boolean indicating if the parameter file should be compatible with a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default 
-#' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
+#' the value of the option \code{"is_cruncher_v3"} is used.
 #' @details When the 'JWSACruncher' is launched, the data is refreshed with a specific policy that is defined by the parameter \code{policy}. The available options are:
 #' \itemize{
 #' \item \code{policy = "current"}: all the estimations are fixed and AO added for new data (since v.2.2.3), short name `policy = "n"`;
@@ -240,7 +240,7 @@ list2param_file <- function(dir_file_param, x,
 #' Get default parameters of the 'JWSACruncher'
 #' 
 #' @param v3 Boolean indicating if the parameters are the from a version 3.0.0 and higher of 'JWSACRuncher' (\code{v3 = TRUE}) or a lower version (\code{v3 = FALSE}). By default 
-#' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
+#' the value of the option \code{"is_cruncher_v3"} is used.
 #' @param cruncher_bin_directory Path to the directory that contains the 'JWSACruncher' binary.
 #' If defined, the parameter `v3` is ignored and the 'JWSACruncher' is run without  parameter to generate the default parameters file.
 #' @seealso [create_param_file()], [read_param_file()], [list2param_file()], [cruncher_and_param()].

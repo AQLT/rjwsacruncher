@@ -2,6 +2,9 @@
 
 - add new parameter `standalone` to `download_cruncher()`.
 
+- by default, the option `"is_cruncher_v3"` is now set to `TRUE`.
+A startup message is added
+
 # rjwsacruncher 0.2.2
 
 - add new parameter `short_column_headers` to `create_param_file()`.
