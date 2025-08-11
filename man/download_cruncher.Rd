@@ -3,6 +3,7 @@
 \encoding{UTF-8}
 \name{download_cruncher}
 \alias{download_cruncher}
+\alias{download_jdemetra}
 \title{Dowload the 'JWSACruncher'}
 \usage{
 download_cruncher(
@@ -11,20 +12,27 @@ download_cruncher(
   v3 = getOption("is_cruncher_v3"),
   standalone = FALSE
 )
+
+download_jdemetra(
+  directory,
+  cruncher_version = NULL,
+  v3 = getOption("is_cruncher_v3"),
+  standalone = FALSE
+)
 }
 \arguments{
-\item{directory}{Directory where to save the 'JWSACruncher'. In Windows, a dialog box opens
+\item{directory}{Directory where to save the file. In Windows, a dialog box opens
 by default to select the directory.}
 
-\item{cruncher_version}{Character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.}
+\item{cruncher_version}{Character of the version to download ("X.Y.Z" format). By default the last version is downloaded.}
 
 \item{v3}{Boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default
-the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).}
+the value of the option \code{"is_cruncher_v3"} is used.}
 
 \item{standalone}{Boolean indicating if the standalone version should be downloaded (only available when \code{v3 = TRUE}).}
 }
 \description{
-Function to download the ZIP file of the 'JWSACruncher'
+Function to download the ZIP file of the 'JWSACruncher' (\code{download_cruncher()}) or 'JDemetra+' (\code{download_jdemetra()}).
 }
 \details{
 The 'JWSACruncher' is downloaded from \url{https://github.com/jdemetra/jwsacruncher/releases} for versions lower than 3.0.0 and from \url{https://github.com/jdemetra/jdplus-main/releases} for the other versions.

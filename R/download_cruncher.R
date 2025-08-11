@@ -1,12 +1,12 @@
 #' Dowload the 'JWSACruncher'
 #'
-#' Function to download the ZIP file of the 'JWSACruncher'
+#' Function to download the ZIP file of the 'JWSACruncher' (`download_cruncher()`) or 'JDemetra+' (`download_jdemetra()`).
 #'
-#' @param directory Directory where to save the 'JWSACruncher'. In Windows, a dialog box opens 
+#' @param directory Directory where to save the file. In Windows, a dialog box opens 
 #' by default to select the directory.
-#' @param cruncher_version Character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.
+#' @param cruncher_version Character of the version to download ("X.Y.Z" format). By default the last version is downloaded.
 #' @param v3 Boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default 
-#' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
+#' the value of the option \code{"is_cruncher_v3"} is used.
 #' @param standalone Boolean indicating if the standalone version should be downloaded (only available when `v3 = TRUE`).
 #' @details The 'JWSACruncher' is downloaded from <https://github.com/jdemetra/jwsacruncher/releases> for versions lower than 3.0.0 and from <https://github.com/jdemetra/jdplus-main/releases> for the other versions.
 #'  To use it, it has to be unzip.
@@ -95,7 +95,8 @@ download_cruncher <- function(directory, cruncher_version = NULL, v3 = getOption
   utils::download.file(release_url, file.path(directory, zip_name))
   return(invisible(TRUE))
 }
-
+#' @rdname download_cruncher
+#' @export
 download_jdemetra <- function(directory, cruncher_version = NULL, v3 = getOption("is_cruncher_v3"), standalone = FALSE){
   if (missing(directory)) {
     if (Sys.info()[['sysname']] == "Windows") {

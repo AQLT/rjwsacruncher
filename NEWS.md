@@ -3,7 +3,9 @@
 - add new parameter `standalone` to `download_cruncher()`.
 
 - by default, the option `"is_cruncher_v3"` is now set to `TRUE`.
-A startup message is added
+A startup message is added.
+
+- new function `download_jdemetra()` to download the JDemetra+ software.
 
 # rjwsacruncher 0.2.2
 
