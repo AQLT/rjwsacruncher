@@ -81,7 +81,7 @@
         options(cruncher_bin_directory = NULL)
   
   if(is.null(getOption("is_cruncher_v3")))
-    options(is_cruncher_v3 = TRUE)
+    options(is_cruncher_v3 = FALSE)
 }
 
 .onAttach <- function(libname, pkgname) {
