@@ -6,6 +6,10 @@
 
 - new function `download_jdemetra()` to download the JDemetra+ software.
 
+- improve `cruncher()` function to handle the case when the `cruncher_bin_directory` parameter provided correspond to the path to the JWSACruncher instead of the bin directory.
+
+- improve error message of of `create_param_file()` when the `dir_file_param` parameter doesn't correspond to an existing directory.
+
 # rjwsacruncher 0.2.2
 
 - add new parameter `short_column_headers` to `create_param_file()`.
