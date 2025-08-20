@@ -62,6 +62,12 @@ create_param_file <- function(
     ){
   if (missing(dir_file_param) & missing(file_param))
     stop("The parameter dir_file_param is missing")
+  if (!dir.exists(dir_file_param)) {
+    stop(sprintf(
+      "The directory '%s' doesn't exist.",
+      dir_file_param
+      ))
+  }
   
   first_line <- "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
   param_line <- paste("<wsaConfig bundle=", bundle, " csvlayout=", csv_layout, " csvseparator=",
