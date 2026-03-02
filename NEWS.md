@@ -10,6 +10,8 @@
 
 - improve error message of of `create_param_file()` when the `dir_file_param` parameter doesn't correspond to an existing directory.
 
+- new function `check_cruncher_bin_directory()` to check if the `cruncher_bin_directory` parameter provided correspond to an existing directory and contains the JWSACruncher executable.
+
 # rjwsacruncher 0.2.2
 
 - add new parameter `short_column_headers` to `create_param_file()`.
