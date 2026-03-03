@@ -75,8 +75,14 @@ cruncher <- function(workspace,
   if (!file.exists(workspace))
     stop (sprintf("The workspace %s doesn't exists", workspace)) 
   
-  if (!file.exists(paste0(cruncher_bin_directory,"/jwsacruncher")))
-    stop (sprintf("JWSACruncher not found in %s.\n Check the installation", paste0(cruncher_bin_directory,"/jwsacruncher"))) 
+  if (!file.exists(paste0(cruncher_bin_directory,"/jwsacruncher"))) {
+    if (file.exists(paste0(cruncher_bin_directory, "/bin","/jwsacruncher"))) {
+      cruncher_bin_directory <- paste0(cruncher_bin_directory, "/bin")
+    } else {
+      stop (sprintf("JWSACruncher not found in %s.\n Check the installation", paste0(cruncher_bin_directory,"/jwsacruncher")))
+    }
+  }
+  
   
   if (!missing(log_file) && !is.null(log_file))
     log_file <- full_path(log_file)

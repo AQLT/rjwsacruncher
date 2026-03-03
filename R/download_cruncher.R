@@ -1,12 +1,13 @@
 #' Dowload the 'JWSACruncher'
 #'
-#' Function to download the ZIP file of the 'JWSACruncher'
+#' Function to download the ZIP file of the 'JWSACruncher' (`download_cruncher()`) or 'JDemetra+' (`download_jdemetra()`).
 #'
-#' @param directory Directory where to save the 'JWSACruncher'. In Windows, a dialog box opens 
+#' @param directory Directory where to save the file. In Windows, a dialog box opens 
 #' by default to select the directory.
-#' @param cruncher_version Character of the version of the 'JWSACruncher' to download ("X.Y.Z" format). By default the last version is downloaded.
+#' @param cruncher_version Character of the version to download ("X.Y.Z" format). By default the last version is downloaded.
 #' @param v3 Boolean indicating, when parameter \code{cruncher_version} is missing, if the last version of the 'JWSACruncher' should be a 3.x.y version or a 2.x.y. By default 
-#' the value of the option \code{"is_cruncher_v3"} is used (equals to \code{FALSE} by default).
+#' the value of the option \code{"is_cruncher_v3"} is used.
+#' @param standalone Boolean indicating if the standalone version should be downloaded (only available when `v3 = TRUE`).
 #' @details The 'JWSACruncher' is downloaded from <https://github.com/jdemetra/jwsacruncher/releases> for versions lower than 3.0.0 and from <https://github.com/jdemetra/jdplus-main/releases> for the other versions.
 #'  To use it, it has to be unzip.
 #' @encoding UTF-8
@@ -24,7 +25,7 @@
 #' }
 #' @seealso [configure_jwsacruncher()].
 #' @export
-download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cruncher_v3")){
+download_cruncher <- function(directory, cruncher_version = NULL, v3 = getOption("is_cruncher_v3"), standalone = FALSE){
   if (missing(directory)) {
     if (Sys.info()[['sysname']] == "Windows") {
       directory <- utils::choose.dir(caption = "Choose to directory where to download the 'JWSACruncher'")
@@ -37,7 +38,7 @@ download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cr
     }
   }
   
-  if (missing(cruncher_version)) { 
+  if (is.null(cruncher_version)) { 
     if (v3) {
       url_release <- "https://api.github.com/repos/jdemetra/jdplus-main/releases/latest"
     } else {
@@ -66,6 +67,102 @@ download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cr
   release_url <- grep("\\.zip$", release_url, value = TRUE)
   release_url <- grep("jwsacruncher", release_url, value = TRUE)
   if (v3) {
+    if (standalone) {
+      sysname <- tolower(Sys.info()["sysname"])
+      machine <- tolower(Sys.info()["machine"])
+      
+      if (sysname == "windows") {
+        os <- "windows-x86_64"
+      } else if (sysname == "darwin") {
+        if (machine == "x86_64") {
+          os <- "osx-x86_64"
+        } else {
+          os <- "osx-aarch_64"
+        } 
+      } else {
+        if (machine == "x86_64") {
+          os <- "linux-x86_64"
+        } else {
+          os <- "linux-aarch_64"
+        } 
+      }
+      release_url <- grep(os, release_url, value = TRUE)
+    } else {
+      release_url <- grep("standalone", release_url, value = TRUE, invert = TRUE)
+    }
+  }
+  zip_name <- gsub(".*/", "", release_url)
+  utils::download.file(release_url, file.path(directory, zip_name))
+  return(invisible(TRUE))
+}
+#' @rdname download_cruncher
+#' @export
+download_jdemetra <- function(directory, cruncher_version = NULL, v3 = getOption("is_cruncher_v3"), standalone = FALSE){
+  if (missing(directory)) {
+    if (Sys.info()[['sysname']] == "Windows") {
+      directory <- utils::choose.dir(caption = "Choose to directory where to download the 'JWSACruncher'")
+      
+      if (is.na(directory)) {
+        stop("You must select or specify the directory where to export the 'JWSACruncher'")
+      }
+    }else{
+      stop("You must specify the directory where to export the 'JWSACruncher'")
+    }
+  }
+  
+  if (is.null(cruncher_version)) { 
+    if (v3) {
+      url_release <- "https://api.github.com/repos/jdemetra/jdplus-main/releases/latest"
+    } else {
+      url_release <- "https://api.github.com/repos/jdemetra/jdemetra-app/releases/latest"
+    }
+  }else{
+    v3 <- cruncher_version >= "3.0.0"
+    if (v3) {
+      url_release <- sprintf("https://api.github.com/repos/jdemetra/jdplus-main/releases/tags/v%s",
+                             cruncher_version)
+    } else {
+      url_release <- sprintf("https://api.github.com/repos/jdemetra/jdemetra-app/releases/tags/v%s",
+                             cruncher_version)
+    }
+  }
+  
+  tryCatch(release_url <- readLines(url_release,
+                                    warn = FALSE),
+           error = function(e){
+             stop("Error downloading the cruncher. Check the URL:", url)
+           })
+  release_url <- strsplit(release_url, ",")[[1]]
+  release_url <- grep("browser_download_url", release_url, value = TRUE)
+  release_url <- gsub("^.*browser_download_url\":\"", "", release_url)
+  release_url <- gsub("\".*", "", release_url)
+  release_url <- grep("\\.zip$", release_url, value = TRUE)
+  release_url <- release_url[grep("jdemetra", basename(release_url))]
+  if (v3) {
+    if (standalone) {
+      sysname <- tolower(Sys.info()["sysname"])
+      machine <- tolower(Sys.info()["machine"])
+      
+      if (sysname == "windows") {
+        os <- "windows-x86_64"
+      } else if (sysname == "darwin") {
+        if (machine == "x86_64") {
+          os <- "osx-x86_64"
+        } else {
+          os <- "osx-aarch_64"
+        } 
+      } else {
+        if (machine == "x86_64") {
+          os <- "linux-x86_64"
+        } else {
+          os <- "linux-aarch_64"
+        } 
+      }
+      release_url <- grep(os, release_url, value = TRUE)
+    } else {
+      release_url <- grep("standalone", release_url, value = TRUE, invert = TRUE)
+    }
+  } else {
     release_url <- grep("windows", release_url, value = TRUE,
                         invert = Sys.info()[['sysname']] != "Windows")
   }
@@ -73,6 +170,7 @@ download_cruncher <- function(directory, cruncher_version, v3 = getOption("is_cr
   utils::download.file(release_url, file.path(directory, zip_name))
   return(invisible(TRUE))
 }
+
 
 # Autre possibilité
 # if (missing(cruncher_version)) {
