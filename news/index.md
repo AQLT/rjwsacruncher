@@ -1,0 +1,111 @@
+# Changelog
+
+## rjwsacruncher 0.2.4 (unreleased)
+
+## rjwsacruncher 0.2.3
+
+CRAN release: 2026-03-02
+
+- add new parameter `standalone` to
+  [`download_cruncher()`](../reference/download_cruncher.md).
+
+- A startup message is added indicating which version of the
+  JWSACruncher is used by default (defined by the option
+  `"is_cruncher_v3"`).
+
+- new function
+  [`download_jdemetra()`](../reference/download_cruncher.md) to download
+  the JDemetra+ software.
+
+- improve [`cruncher()`](../reference/cruncher.md) function to handle
+  the case when the `cruncher_bin_directory` parameter provided
+  correspond to the path to the JWSACruncher instead of the bin
+  directory.
+
+- improve error message of of
+  [`create_param_file()`](../reference/create_param_file.md) when the
+  `dir_file_param` parameter doesn’t correspond to an existing
+  directory.
+
+- new function `check_cruncher_bin_directory()` to check if the
+  `cruncher_bin_directory` parameter provided correspond to an existing
+  directory and contains the JWSACruncher executable.
+
+## rjwsacruncher 0.2.2
+
+CRAN release: 2025-07-18
+
+- add new parameter `short_column_headers` to
+  [`create_param_file()`](../reference/create_param_file.md).
+
+- correction of
+  [`default_param_file()`](../reference/default_param_file.md) when
+  `cruncher_bin_directory` is defined.
+
+- correction of [`read_param_file()`](../reference/read_param_file.md)
+  which where converting `full_series_name` parameter to `FALSE`.
+
+- if the default parameter file of the ‘JWSACruncher’ already exists,
+  [`default_param_file()`](../reference/default_param_file.md) do not
+  erase and delete it when `cruncher_bin_directory` is defined.
+
+## rjwsacruncher 0.2.1
+
+CRAN release: 2025-02-07
+
+- parameters `rename_multi_documents` and `renaming_existing_files`
+  added in [`cruncher()`](../reference/cruncher.md) function.
+
+- parameter `cruncher_bin_directory` added in `default_parameter_file()`
+  to get the default parameter from a local installation of the
+  JWSACruncher.
+
+- parameter `file_param` added in
+  [`create_param_file()`](../reference/create_param_file.md) and
+  [`list2param_file()`](../reference/list2param_file.md) to be able to
+  change the name of the parameter file.
+
+- documentation update to add new policies.
+
+## rjwsacruncher 0.2.0
+
+CRAN release: 2023-10-04
+
+- correction in export of the log file when relative path are given.
+
+- [`cruncher_and_param()`](../reference/cruncher_and_param.md)
+  correction in linux when `rename_multi_documents = TRUE`.
+
+- [`download_cruncher()`](../reference/download_cruncher.md) now
+  compatible with version higher than 3.0.0.
+
+- new parameters in
+  [`create_param_file()`](../reference/create_param_file.md).
+
+- new functions [`read_param_file()`](../reference/read_param_file.md),
+  [`default_param_file()`](../reference/default_param_file.md) and
+  [`list2param_file()`](../reference/list2param_file.md).
+
+## rjwsacruncher 0.1.3
+
+CRAN release: 2022-11-11
+
+- [`cruncher()`](../reference/cruncher.md) correction for
+  `param_file_path`.
+
+- documentation update.
+
+## rjwsacruncher 0.1.2
+
+CRAN release: 2021-09-11
+
+- Linux compatible path (PR
+  [\#2](https://github.com/AQLT/rjwsacruncher/issues/2)).
+
+## rjwsacruncher 0.1.1
+
+CRAN release: 2021-07-21
+
+- [`download_cruncher()`](../reference/download_cruncher.md) correction.
+
+- functions now compatible with MAC OS and Linux environment.

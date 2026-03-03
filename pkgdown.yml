@@ -1,0 +1,6 @@
+pandoc: 3.1.11
+pkgdown: 2.2.0
+pkgdown_sha: ~
+articles:
+  run_jwsacruncher: run_jwsacruncher.html
+last_built: 2026-03-03T19:42Z
