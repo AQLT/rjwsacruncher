@@ -5,6 +5,8 @@
 
 [![R-CMD-check](https://github.com/AQLT/rjwsacruncher/workflows/R-CMD-check/badge.svg)](https://github.com/AQLT/rjwsacruncher/actions)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)
+[![R universe
+version](https://aqlt.r-universe.dev/badges/rjwsacruncher)](https://aqlt.r-universe.dev/rjwsacruncher)
 [![CRAN last
 release](https://www.r-pkg.org/badges/last-release/rjwsacruncher)](https://cran.r-project.org/package=rjwsacruncher)
 [![CRAN monthly
